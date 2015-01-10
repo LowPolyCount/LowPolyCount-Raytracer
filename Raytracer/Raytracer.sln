@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GTest", "..\lib\gtest-1.7.0\GTest.vcxproj", "{C1D206AF-853E-4A7A-8E32-0338A1575C34}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Raytracer", "src\Raytracer.vcxproj", "{9B3DBED8-BC6B-4F23-AFAB-93B57B8F1B2A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1D206AF-853E-4A7A-8E32-0338A1575C34}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C1D206AF-853E-4A7A-8E32-0338A1575C34}.Debug|Win32.Build.0 = Debug|Win32
+		{C1D206AF-853E-4A7A-8E32-0338A1575C34}.Debug|x64.ActiveCfg = Debug|Win32
+		{C1D206AF-853E-4A7A-8E32-0338A1575C34}.Release|Win32.ActiveCfg = Release|Win32
+		{C1D206AF-853E-4A7A-8E32-0338A1575C34}.Release|Win32.Build.0 = Release|Win32
+		{C1D206AF-853E-4A7A-8E32-0338A1575C34}.Release|x64.ActiveCfg = Release|Win32
+		{9B3DBED8-BC6B-4F23-AFAB-93B57B8F1B2A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9B3DBED8-BC6B-4F23-AFAB-93B57B8F1B2A}.Debug|Win32.Build.0 = Debug|Win32
+		{9B3DBED8-BC6B-4F23-AFAB-93B57B8F1B2A}.Debug|x64.ActiveCfg = Debug|Win32
+		{9B3DBED8-BC6B-4F23-AFAB-93B57B8F1B2A}.Release|Win32.ActiveCfg = Release|Win32
+		{9B3DBED8-BC6B-4F23-AFAB-93B57B8F1B2A}.Release|Win32.Build.0 = Release|Win32
+		{9B3DBED8-BC6B-4F23-AFAB-93B57B8F1B2A}.Release|x64.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

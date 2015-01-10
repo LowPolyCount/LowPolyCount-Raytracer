@@ -1,0 +1,4 @@
+sphere 0 1 2 2
+point -1 -2 -3
+camera 1 1 1 1 1 1
+image 256 640

@@ -1,0 +1,21 @@
+- type: sphere
+  position: [0, 0, -10]
+  radius: 2
+- type: sphere
+  position: [5, 5, -10]
+  radius: 2
+- type: sphere
+  position: [-5, -5, -8]
+  radius: 2
+- type: sphere
+  position: [-15, -15, -15]
+  radius: 2
+- type: point
+  position: [0, 0, 2]
+- type: camera
+  position: [0, 0, 0]
+  direction: [0, 0, -1]
+  plane1: [0, 0, 0]
+  plane2: [0, 0, 0]
+- type: image
+  resolution: [600, 600, 0]
