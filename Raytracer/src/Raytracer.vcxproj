@@ -41,11 +41,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(LibraryPath);D:\dev\c++\lib\SDL2-2.0.3\VisualC\SDL\Win32\Debug;D:\dev\c++\lib\yaml-cpp-0.5.1\Debug</LibraryPath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(LibraryPath);D:\dev\c++\lib\SDL2-2.0.3\VisualC\SDL\Win32\Release;D:\dev\c++\lib\yaml-cpp-0.5.1\Release</LibraryPath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -60,8 +60,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;GTest.lib;libyaml-cppmdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\lib\Debug;..\Debug;..\..\external\yaml-cpp-0.5.1\Debug;..\..\external\SDL2-2.0.3\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2main.lib;SDL2test.lib;SDL2.lib;GTest.lib;libyaml-cppmdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\lib\SDL2-2.0.3\VisualC\SDLtest\$(Platform)\$(Configuration)\;..\..\lib\yaml-cpp-0.5.1\$(Platform)\$(Configuration)\;..\..\lib\gtest-1.7.0\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDLmain\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDL\$(Platform)\$(Configuration)\;..\..\lib\gtest-1.7.0\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDL\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories);..\lib\Debug;..\Debug;..\..\external\yaml-cpp-0.5.1\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -79,8 +79,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;GTest.lib;libyaml-cppmd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\external\yaml-cpp-0.5.1\Release;..\..\external\SDL2-2.0.3\Release;..\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libyaml-cppmd.lib;SDL2main.lib;SDL2test.lib;SDL2.lib;GTest.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\lib\gtest-1.7.0\$(Platform)\$(Configuration)\;..\..\lib\yaml-cpp-0.5.1\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDLtest\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDLmain\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDL\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
