@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="Windows-1252"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\emittertests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\spectests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\new-api\nodetests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\new-api\parsertests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\new-api\spectests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\emittertests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\genemittertests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\handlermacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\nodetests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\parsertests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\specexamples.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\spectests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\tests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\teststruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\test\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{9CB1B8CA-6F95-4261-A8EA-1B992EB61072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{133D5CED-BA4C-4580-B943-B88656A36DE8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
