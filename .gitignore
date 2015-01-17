@@ -85,8 +85,8 @@ Temporary Items
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-#x64/
-#x86/
+x64/
+x86/
 build/
 bld/
 [Bb]in/
@@ -264,3 +264,8 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+#boost directory includes
+!lib/boost_1_57_0/boost/predef/architecture/x86
+!lib/boost_1_57_0/boost/preprocessor/debug
+
