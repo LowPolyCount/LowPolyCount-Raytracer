@@ -53,15 +53,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\lib\gtest-1.7.0\include;..\..\lib\SDL2-2.0.3\include;..\..\lib\boost_1_57_0;..\..\external\yaml-cpp-0.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\lib\gtest-1.7.0\include;..\..\lib\SDL2-2.0.3\include;..\..\lib\boost_1_57_0;..\..\lib\yaml-cpp-0.5.1\include</AdditionalIncludeDirectories>
       <SDLCheck>false</SDLCheck>
       <DisableSpecificWarnings>4996</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2main.lib;SDL2test.lib;SDL2.lib;GTest.lib;libyaml-cppmdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\lib\SDL2-2.0.3\VisualC\SDLtest\$(Platform)\$(Configuration)\;..\..\lib\yaml-cpp-0.5.1\$(Platform)\$(Configuration)\;..\..\lib\gtest-1.7.0\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDL\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDLmain\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories);..\lib\Debug;..\Debug;..\..\external\yaml-cpp-0.5.1\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;GTest.lib;libyaml-cppmdd.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\lib\yaml-cpp-0.5.1\$(Platform)\$(Configuration)\;..\..\lib\gtest-1.7.0\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDL\$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -72,15 +72,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\..\lib\gtest-1.7.0\include;..\..\lib\SDL2-2.0.3\include;..\..\lib\boost_1_57_0;..\..\external\yaml-cpp-0.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\lib\gtest-1.7.0\include;..\..\lib\SDL2-2.0.3\include;..\..\lib\boost_1_57_0;..\..\lib\yaml-cpp-0.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libyaml-cppmd.lib;SDL2main.lib;SDL2test.lib;SDL2.lib;GTest.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\lib\gtest-1.7.0\$(Platform)\$(Configuration)\;..\..\lib\yaml-cpp-0.5.1\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDLtest\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDLmain\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDL\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;GTest.lib;libyaml-cppmd.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\lib\gtest-1.7.0\$(Platform)\$(Configuration)\;..\..\lib\yaml-cpp-0.5.1\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDL\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
