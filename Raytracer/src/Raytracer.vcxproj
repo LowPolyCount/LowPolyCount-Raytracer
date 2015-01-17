@@ -61,7 +61,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SDL2main.lib;SDL2test.lib;SDL2.lib;GTest.lib;libyaml-cppmdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\lib\SDL2-2.0.3\VisualC\SDLtest\$(Platform)\$(Configuration)\;..\..\lib\yaml-cpp-0.5.1\$(Platform)\$(Configuration)\;..\..\lib\gtest-1.7.0\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDLmain\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDL\$(Platform)\$(Configuration)\;..\..\lib\gtest-1.7.0\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDL\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories);..\lib\Debug;..\Debug;..\..\external\yaml-cpp-0.5.1\Debug</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\SDL2-2.0.3\VisualC\SDLtest\$(Platform)\$(Configuration)\;..\..\lib\yaml-cpp-0.5.1\$(Platform)\$(Configuration)\;..\..\lib\gtest-1.7.0\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDL\$(Platform)\$(Configuration)\;..\..\lib\SDL2-2.0.3\VisualC\SDLmain\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories);..\lib\Debug;..\Debug;..\..\external\yaml-cpp-0.5.1\Debug</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

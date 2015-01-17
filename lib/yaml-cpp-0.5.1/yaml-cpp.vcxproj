@@ -9,14 +9,6 @@
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="MinSizeRel|Win32">
-      <Configuration>MinSizeRel</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="RelWithDebInfo|Win32">
-      <Configuration>RelWithDebInfo</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGUID>{3795C219-6C68-415E-9896-F644A00360C8}</ProjectGUID>
@@ -32,18 +24,6 @@
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseOfMfc>false</UseOfMfc>
-    <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
@@ -66,18 +46,15 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">yaml-cpp.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">libyaml-cppmd</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">$(Platform)\$(Configuration)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">yaml-cpp.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">libyaml-cppmd</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">$(Platform)\$(Configuration)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">yaml-cpp.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">libyaml-cppmd</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
+    <PreLinkEventUseInBuild>false</PreLinkEventUseInBuild>
+    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include;c:\Users\Joel\Desktop\code\lib\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;include;..\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -108,7 +85,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include;c:\Users\Joel\Desktop\code\lib\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;include;..\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DisableSpecificWarnings>4127;4355</DisableSpecificWarnings>
@@ -136,218 +113,66 @@
       <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include;c:\Users\Joel\Desktop\code\lib\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
-      <CompileAs>CompileAsCpp</CompileAs>
-      <DisableSpecificWarnings>4127;4355</DisableSpecificWarnings>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <Optimization>MinSpace</Optimization>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include;c:\Users\Joel\Desktop\code\lib\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include;c:\Users\Joel\Desktop\code\lib\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include;c:\Users\Joel\Desktop\code\lib\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
-      <CompileAs>CompileAsCpp</CompileAs>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <DisableSpecificWarnings>4127;4355</DisableSpecificWarnings>
-      <ExceptionHandling>Sync</ExceptionHandling>
-      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
-      <Optimization>MaxSpeed</Optimization>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ObjectFileName>$(IntDir)</ObjectFileName>
-    </ClCompile>
-    <ResourceCompile>
-      <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include;c:\Users\Joel\Desktop\code\lib\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ResourceCompile>
-    <Midl>
-      <AdditionalIncludeDirectories>C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include;c:\Users\Joel\Desktop\code\lib\boost_1_57_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OutputDirectory>$(IntDir)</OutputDirectory>
-      <HeaderFileName>%(Filename).h</HeaderFileName>
-      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
-      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
-    </Midl>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1 -BC:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1 --check-stamp-file C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1/CMakeLists.txt;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeLists.txt;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeCCompiler.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\FindBoost.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1 -BC:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1 --check-stamp-file C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1/CMakeLists.txt;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeLists.txt;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeCCompiler.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\FindBoost.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1 -BC:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1 --check-stamp-file C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1/CMakeLists.txt;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeLists.txt;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeCCompiler.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\FindBoost.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1/CMakeLists.txt</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-"C:\Program Files (x86)\CMake\bin\cmake.exe" -HC:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1 -BC:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1 --check-stamp-file C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\generate.stamp
-if %errorlevel% neq 0 goto :cmEnd
-:cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
-:cmErrorLevel
-exit /b %1
-:cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1/CMakeLists.txt;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeLists.txt;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CheckCXXCompilerFlag.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CheckCXXSourceCompiles.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeCCompiler.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeCXXCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeGenericSystem.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\WindowsPaths.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\3.1.0\CMakeRCCompiler.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeRCInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCXXInformation.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\Platform\Windows-MSVC.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files (x86)\CMake\share\cmake-3.1\Modules\FindBoost.cmake;C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\CMakeFiles\generate.stamp</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
-    </CustomBuild>
+    <ClInclude Include="src\collectionstack.h" />
+    <ClInclude Include="src\contrib\graphbuilderadapter.h" />
+    <ClInclude Include="src\directives.h" />
+    <ClInclude Include="src\emitterstate.h" />
+    <ClInclude Include="src\emitterutils.h" />
+    <ClInclude Include="src\exp.h" />
+    <ClInclude Include="src\indentation.h" />
+    <ClInclude Include="src\nodebuilder.h" />
+    <ClInclude Include="src\nodeevents.h" />
+    <ClInclude Include="src\ptr_stack.h" />
+    <ClInclude Include="src\ptr_vector.h" />
+    <ClInclude Include="src\regex.h" />
+    <ClInclude Include="src\regeximpl.h" />
+    <ClInclude Include="src\scanner.h" />
+    <ClInclude Include="src\scanscalar.h" />
+    <ClInclude Include="src\scantag.h" />
+    <ClInclude Include="src\setting.h" />
+    <ClInclude Include="src\singledocparser.h" />
+    <ClInclude Include="src\stream.h" />
+    <ClInclude Include="src\streamcharsource.h" />
+    <ClInclude Include="src\stringsource.h" />
+    <ClInclude Include="src\tag.h" />
+    <ClInclude Include="src\token.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\anchor.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\binary.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\contrib\anchordict.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\contrib\graphbuilder.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\dll.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\emitfromevents.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\emitter.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\emitterdef.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\emittermanip.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\eventhandler.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\exceptions.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\mark.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\convert.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\detail\bool_type.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\detail\impl.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\detail\iterator.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\detail\iterator_fwd.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\detail\memory.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\detail\node.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\detail\node_data.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\detail\node_iterator.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\detail\node_ref.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\emit.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\impl.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\iterator.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\node.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\parse.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\ptr.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\node\type.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\noncopyable.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\null.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\ostream_wrapper.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\parser.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\stlemitter.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\traits.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\include\yaml-cpp\yaml.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\collectionstack.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\directives.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\emitterstate.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\emitterutils.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\exp.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\indentation.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\nodebuilder.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\nodeevents.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\ptr_stack.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\ptr_vector.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\regex.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\regeximpl.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\scanner.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\scanscalar.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\scantag.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\setting.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\singledocparser.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\stream.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\streamcharsource.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\stringsource.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\tag.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\token.h" />
-    <ClInclude Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\contrib\graphbuilderadapter.h" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\binary.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\convert.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\directives.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\emit.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\emitfromevents.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\emitter.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\emitterstate.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\emitterutils.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\exp.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\memory.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\node.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\nodebuilder.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\nodeevents.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\node_data.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\null.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\ostream_wrapper.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\parse.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\parser.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\regex.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\scanner.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\scanscalar.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\scantag.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\scantoken.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\simplekey.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\singledocparser.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\stream.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\tag.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\contrib\graphbuilder.cpp" />
-    <ClCompile Include="C:\Users\Joel\Desktop\code\lib\yaml-cpp-0.5.1\src\contrib\graphbuilderadapter.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="C:/Users/Joel/Desktop/code/lib/yaml-cpp-0.5.1/ZERO_CHECK.vcxproj">
-      <Project>C789C79B-077A-4CE2-A47F-EF4ABC0F27CB</Project>
-    </ProjectReference>
+    <ClCompile Include="src\binary.cpp" />
+    <ClCompile Include="src\contrib\graphbuilder.cpp" />
+    <ClCompile Include="src\contrib\graphbuilderadapter.cpp" />
+    <ClCompile Include="src\convert.cpp" />
+    <ClCompile Include="src\directives.cpp" />
+    <ClCompile Include="src\emit.cpp" />
+    <ClCompile Include="src\emitfromevents.cpp" />
+    <ClCompile Include="src\emitter.cpp" />
+    <ClCompile Include="src\emitterstate.cpp" />
+    <ClCompile Include="src\emitterutils.cpp" />
+    <ClCompile Include="src\exp.cpp" />
+    <ClCompile Include="src\memory.cpp" />
+    <ClCompile Include="src\node.cpp" />
+    <ClCompile Include="src\nodebuilder.cpp" />
+    <ClCompile Include="src\nodeevents.cpp" />
+    <ClCompile Include="src\node_data.cpp" />
+    <ClCompile Include="src\null.cpp" />
+    <ClCompile Include="src\ostream_wrapper.cpp" />
+    <ClCompile Include="src\parse.cpp" />
+    <ClCompile Include="src\parser.cpp" />
+    <ClCompile Include="src\regex.cpp" />
+    <ClCompile Include="src\scanner.cpp" />
+    <ClCompile Include="src\scanscalar.cpp" />
+    <ClCompile Include="src\scantag.cpp" />
+    <ClCompile Include="src\scantoken.cpp" />
+    <ClCompile Include="src\simplekey.cpp" />
+    <ClCompile Include="src\singledocparser.cpp" />
+    <ClCompile Include="src\stream.cpp" />
+    <ClCompile Include="src\tag.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
