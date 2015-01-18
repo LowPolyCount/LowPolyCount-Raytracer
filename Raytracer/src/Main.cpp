@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	// do stuff
 	WorldManager world;
 
-	auto tt = make_unique<YamlFile>();
+	//auto tt = make_unique<YamlFile>();
 	//std::unique_ptr<IFileLoader> loadertt = tt;
 	std::unique_ptr<IFileLoader> loader(new YamlFile());
 	char t = ' ';

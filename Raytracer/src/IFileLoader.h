@@ -1,5 +1,8 @@
 #pragma once
 
+/**
+An interface that defines data that will be loaded in from a file and converted to the DeserializeData format
+*/
 #include <vector>
 #include "DeserializeData.h"
 

@@ -5,15 +5,15 @@
   position: [5, 5, -10]
   radius: 2
 - type: sphere
-  position: [-5, -5, -8]
+  position: [-5, -5, -100]
   radius: 2
 - type: sphere
-  position: [-15, -15, -15]
+  position: [-10, -10, 0]
   radius: 2
 - type: point
   position: [0, 0, 2]
 - type: camera
-  position: [0, 0, 0]
+  position: [0, 0, 100]
   direction: [0, 0, -1]
   plane1: [0, 0, 0]
   plane2: [0, 0, 0]
