@@ -10,17 +10,17 @@ using namespace std;
 
 Sphere::Sphere()
 : CollidableObject(WorldType::CT_Sphere)
-, position()
-, radius(0)
-, radiusSqr(0)
+, m_position()
+, m_radius(0)
+, m_radiusSqr(0)
 {
 }
 
 Sphere::Sphere(const Vector3d& inPos, double inRadius)
 : CollidableObject(WorldType::CT_Sphere)
-, position()
-, radius(0)
-, radiusSqr(0)
+, m_position()
+, m_radius(0)
+, m_radiusSqr(0)
 {
 	Init(inPos, inRadius);
 }
@@ -29,18 +29,25 @@ Sphere::~Sphere(){}
 
 void Sphere::Init(const Vector3d& inPos, double inRadius)
 {
-	position.Init(inPos);
+	m_position.Init(inPos);
 
-	radius = inRadius;
-	radiusSqr = (inRadius*inRadius);
+	m_radius = inRadius;
+	m_radiusSqr = (inRadius*inRadius);
 }
 
 void Sphere::Init(const DeserializeData& data)
 {
 	Init(data.m_mapVector.at(DeserializeData::POSITION), data.m_mapDouble.at(DeserializeData::RADIUS));
+	Vector3d material = data.m_mapVector.at(DeserializeData::MATERIAL);
+	//m_materials = data.m_mapVector.at(DeserializeData::MATERIAL);
+	m_lastMaterialHit = static_cast<int>(material.x) + (static_cast<int>(material.y) << 8) + (static_cast<int>(material.z) << 16);
 }
 
-//returnValue->Init(data.m_mapVector.at(DeserializeData::POSITION));
+RGBA Sphere::GetLastMaterialHit() const
+{
+	return m_lastMaterialHit;
+}
+
 bool Sphere::IsCollision(const CollidableObject& rhs) const
 {
 	switch (rhs.GetType())
@@ -61,14 +68,14 @@ bool Sphere::IsCollision(const CollidableObject& rhs) const
 
 bool Sphere::IsCollisionPoint(const Point& rhs) const
 {
-	const double rhsLength = std::abs((position.GetPosition() - rhs.GetPosition()).lengthSqr());
-	return (rhsLength <= radiusSqr);
+	const double rhsLength = std::abs((m_position.GetPosition() - rhs.GetPosition()).lengthSqr());
+	return (rhsLength <= m_radiusSqr);
 }
 
 bool Sphere::IsCollisionSphere(const Sphere& rhs) const
 {
-	const double rhsLength = std::abs((position.GetPosition() - rhs.GetPosition()).lengthSqr());
-	return (rhsLength <= (radiusSqr+rhs.GetRadiusSqr()));
+	const double rhsLength = std::abs((m_position.GetPosition() - rhs.GetPosition()).lengthSqr());
+	return (rhsLength <= (m_radiusSqr+rhs.GetRadiusSqr()));
 }
 
 TEST(PointCollision, Sphere)

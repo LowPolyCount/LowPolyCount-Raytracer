@@ -20,6 +20,7 @@ static const string TYPE = "type";
 static const string POSITION = "position";
 static const string DIRECTION = "direction";
 static const string RESOLUTION = "resolution";
+static const string MATERIAL = "material";
 static const string NEARPLANE = "nearPlane";
 static const string FARPLANE = "farPlane";
 
@@ -145,6 +146,7 @@ WorldObject::WorldType YamlFile::FindType(const std::string& stringType) const
 void YamlFile::TokenizeSphere(const YAML::Node data, DeserializeData& returnData) const
 {
 	returnData.m_mapVector[DeserializeData::POSITION] = data[POSITION].as<Vector3d>();
+	returnData.m_mapVector[DeserializeData::MATERIAL] = data[MATERIAL].as<Vector3d>();
 	returnData.m_mapDouble[DeserializeData::RADIUS] = data[RADIUS].as<double>();
 }
 
@@ -176,6 +178,7 @@ TEST(dataLoad, YamlFile)
 
 	EXPECT_EQ(result[0].m_type, WorldObject::WorldType::CT_Sphere);
 	EXPECT_EQ(result[0].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(0, 1, 2));
+	EXPECT_EQ(result[0].m_mapVector.at(DeserializeData::MapIds::MATERIAL), Vector3d(100, 101, 102));
 	EXPECT_EQ(result[0].m_mapDouble.at(DeserializeData::MapIds::RADIUS), 2);
 
 	EXPECT_EQ(result[1].m_type, WorldObject::WorldType::CT_Point);

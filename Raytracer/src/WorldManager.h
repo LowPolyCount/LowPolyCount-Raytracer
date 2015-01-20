@@ -22,7 +22,7 @@ protected:
 	typedef std::vector<std::unique_ptr<CollidableObject>> VectorOfObjectPtr;
 	void UpdateRays();
 	void RunThroughSimulation();
-	bool FindIfIntersect(const Ray& testRay);
+	RGBA FindIfIntersect(const Ray& testRay);
 	void DrawImage();
 	std::vector<CollidableObject*>	m_objects;
 	std::vector<std::vector<Ray>>	m_currentScene;

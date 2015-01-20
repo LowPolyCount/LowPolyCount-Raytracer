@@ -11,20 +11,22 @@ public:
 	Sphere(double inRadius);
 	Sphere(const Vector3d& inPos, double inRadius);
 	~Sphere();
-	void Init(const Vector3d& inPos, double inRadius);
-	void Init(const DeserializeData& data);
+	virtual void Init(const Vector3d& inPos, double inRadius);
+	virtual void Init(const DeserializeData& data);
 	virtual bool IsCollision(const CollidableObject& rhs) const;
+	virtual RGBA GetLastMaterialHit() const;
 
 
-	inline const Vector3d& GetPosition() const { return position.GetPosition(); }
-	inline double GetRadius() const{ return radius; }
-	inline double GetRadiusSqr() const { return radiusSqr; }
+	inline const Vector3d& GetPosition() const { return m_position.GetPosition(); }
+	inline double GetRadius() const{ return m_radius; }
+	inline double GetRadiusSqr() const { return m_radiusSqr; }
 protected:
 	virtual bool IsCollisionPoint(const Point& rhs) const;
 	virtual bool IsCollisionSphere(const Sphere& rhs) const;
 private:
-	Point		position;
-	double		radius;
-	double		radiusSqr;
+	Point		m_position;
+	RGBA		m_lastMaterialHit;
+	double		m_radius;
+	double		m_radiusSqr;
 };
 

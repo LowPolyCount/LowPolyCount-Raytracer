@@ -1,14 +1,13 @@
 #pragma once
 #include <vector>
-#include "SDL_stdinc.h"
 #include "Vector3d.h"
 #include "WorldObject.h"
 #include "IRenderer.h"
+#include "RaytracerTypes.h"
 
 
 struct SDL_Window;
 struct SDL_Surface;
-typedef Uint32 RGBA;
 class RendererSDL : public IRenderer
 {
 public:

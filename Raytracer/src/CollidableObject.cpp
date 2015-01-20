@@ -1,6 +1,6 @@
 #include "stdafx.h"
-#include "CollidableObject.h"
 #include <iostream>
+#include "CollidableObject.h"
 
 using namespace std;
 
@@ -17,4 +17,9 @@ bool CollidableObject::IsCollision(const CollidableObject& rhs) const
 {
 	cout << "Calling IsCollision in ICollidable!" << endl;
 	return false;
+}
+
+RGBA CollidableObject::GetLastMaterialHit() const
+{ 
+	return COLOR_WHITE; 
 }

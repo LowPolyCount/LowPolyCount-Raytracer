@@ -13,6 +13,7 @@ struct DeserializeData
 		POSITION = 0,
 		DIRECTION,
 		RADIUS,
+		MATERIAL,
 		FRONTVIEWFRUSTRUM,
 		BACKVIEWFRUSTRUM,
 		PLANE1,				// TODO: find better way to represent complex types

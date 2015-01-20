@@ -97,6 +97,7 @@
     <ClInclude Include="CollidableObject.h" />
     <ClInclude Include="IFileLoader.h" />
     <ClInclude Include="IRenderer.h" />
+    <ClInclude Include="RaytracerTypes.h" />
     <ClInclude Include="RendererSDL.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Ray.h" />

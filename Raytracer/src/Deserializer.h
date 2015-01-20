@@ -4,7 +4,6 @@
 #include "IFileLoader.h"
 #include "DeserializeData.h"
 #include "WorldObject.h"
-//#include "yaml-cpp\yaml.h"
 
 //@TODO: Remove file. Not longer used.
 class Deserializer: public IFileLoader

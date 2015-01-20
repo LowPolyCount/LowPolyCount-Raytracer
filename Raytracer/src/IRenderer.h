@@ -1,8 +1,8 @@
 #pragma once
-#include <inttypes.h>
+#include "WorldObject.h"
+#include "RaytracerTypes.h"
 
 struct DeserializeData;
-typedef uint32_t RGBA;
 class IRenderer: public WorldObject
 {
 public:

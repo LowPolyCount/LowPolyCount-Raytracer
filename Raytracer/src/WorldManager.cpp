@@ -116,25 +116,26 @@ void WorldManager::RunThroughSimulation()
 	{
 		for (int i = 0; i<width; i++)
 		{
-			if (FindIfIntersect(m_currentScene[i][j]))
-			{
-				m_image->SetPixel(i, j, HIT_COLOR);				
-			}
+			RGBA hitColor = FindIfIntersect(m_currentScene[i][j]);
+			//if (FindIfIntersect(m_currentScene[i][j]))
+			//{
+			m_image->SetPixel(i, j, hitColor);
+			//}
 		}
 	}
 }
 
-bool WorldManager::FindIfIntersect(const Ray& testRay)
+RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 {
 	for (auto i = m_objects.begin(); i != m_objects.end(); ++i)
 	{
 		if ((*i)->IsCollision(testRay))
 		{
-			return true;
+			return (*i)->GetLastMaterialHit();
 		}
 	}
 
-	return false;
+	return COLOR_WHITE;
 }
 
 void WorldManager::UpdateRays()

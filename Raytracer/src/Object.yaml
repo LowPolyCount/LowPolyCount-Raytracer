@@ -1,14 +1,18 @@
 - type: sphere
   position: [0, 0, -10]
+  material: [200, 200, 200]
   radius: 2
 - type: sphere
   position: [5, 5, -10]
+  material: [100, 100, 100]
   radius: 2
 - type: sphere
   position: [-5, -5, -100]
+  material: [50, 50, 50]
   radius: 2
 - type: sphere
   position: [-10, -10, 0]
+  material: [25, 25, 25]
   radius: 2
 - type: point
   position: [0, 0, 2]

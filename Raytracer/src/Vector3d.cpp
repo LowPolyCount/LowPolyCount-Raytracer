@@ -4,6 +4,7 @@
 #include <math.h>
 #include <float.h>
 #include <iostream>
+//#include "IRenderer.h"	//@TODO: Keep until we move materials to another class
 
 using namespace std;
 
@@ -163,7 +164,6 @@ string Vector3d::ToString() const
 	return to_string(x) + string(" ") + to_string(y) + string(" ") + to_string(z);
 	
 }
-
 
 TEST(Length, Vector3d)
 {

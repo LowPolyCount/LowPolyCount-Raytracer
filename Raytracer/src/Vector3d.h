@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+
 class Vector3d
 {
 public:
@@ -28,5 +29,4 @@ public:
 
 	double x, y, z;
 };
-//typedef Vector3d RGB;
 
