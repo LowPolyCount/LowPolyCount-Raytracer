@@ -125,12 +125,23 @@ void WorldManager::RunThroughSimulation()
 	}
 }
 
+struct HitInformaionStruct
+{
+	RGBA m_hitMaterial;
+	double m_distance;
+};
+
 RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 {
+	std::vector<HitInformaionStruct> hitsDetected;
+	Vector3d pointOfIntersect;
 	for (auto i = m_objects.begin(); i != m_objects.end(); ++i)
 	{
-		if ((*i)->IsCollision(testRay))
+		if ((*i)->IsCollision(testRay, pointOfIntersect))
 		{
+			//HitInformaionStruct hitInfo;
+			//hitInfo.m_hitMaterial = (*i)->GetLastMaterialHit();
+			//hitInfo.m_distance = (*i)->IstestRay.GetPosition() 
 			return (*i)->GetLastMaterialHit();
 		}
 	}

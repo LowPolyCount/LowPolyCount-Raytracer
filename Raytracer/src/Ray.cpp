@@ -41,16 +41,16 @@ void Ray::Init(const Vector3d& pos, const Vector3d& dir)
 	m_direction = dir.Normalize();
 }
 
-bool Ray::IsCollision(const CollidableObject& rhs) const
+bool Ray::IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect) const
 {
 	switch (rhs.GetType())
 	{
 	case WorldType::CT_Point:
-		return IsCollisionPoint(static_cast<const Point&>(rhs));
+		return IsCollisionPoint(static_cast<const Point&>(rhs), pointOfIntersect);
 	case WorldType::CT_Sphere:
-		return IsCollisionSphere(static_cast<const Sphere&>(rhs));
+		return IsCollisionSphere(static_cast<const Sphere&>(rhs), pointOfIntersect);
 	case WorldType::CT_Ray:
-		return IsCollisionRay(static_cast<const Ray&>(rhs));
+		return IsCollisionRay(static_cast<const Ray&>(rhs), pointOfIntersect);
 	default:
 		cout << "DEFAULT IsCollision" << endl;
 		break;
@@ -59,7 +59,7 @@ bool Ray::IsCollision(const CollidableObject& rhs) const
 	return false;
 }
 
-bool Ray::IsCollisionPoint(const Point& rhs) const
+bool Ray::IsCollisionPoint(const Point& rhs, Vector3d& pointOfIntersect) const
 {
 	if (m_position == rhs.GetPosition())
 	{
@@ -70,7 +70,7 @@ bool Ray::IsCollisionPoint(const Point& rhs) const
 	return dxc == m_direction;
 }
 
-bool Ray::IsCollisionSphere(const Sphere& rhs) const
+bool Ray::IsCollisionSphere(const Sphere& rhs, Vector3d& pointOfIntersect) const
 {
 	const Vector3d vecToSphere = (rhs.GetPosition() - GetPosition());
 	const double Tca = vecToSphere.DotProduct(m_direction);
@@ -95,7 +95,7 @@ bool Ray::IsCollisionSphere(const Sphere& rhs) const
 	return true;
 }
 
-bool Ray::IsCollisionRay(const Ray& rhs) const
+bool Ray::IsCollisionRay(const Ray& rhs, Vector3d& pointOfIntersect) const
 {
 	printf("IsCollisionRay not implemented!\n");
 	return true;
@@ -114,18 +114,18 @@ TEST(PointCollision, Ray)
 	Point test5(Vector3d(2, 2, 2));		// not in line
 	
 	// forwards
-	EXPECT_TRUE(forwards.IsCollision(test1));
-	EXPECT_TRUE(forwards.IsCollision(test2));
-	EXPECT_FALSE(forwards.IsCollision(test3));
-	EXPECT_FALSE(forwards.IsCollision(test4));
-	EXPECT_FALSE(forwards.IsCollision(test5));
+	EXPECT_TRUE(forwards.IsCollision(test1, Vector3d()));
+	EXPECT_TRUE(forwards.IsCollision(test2, Vector3d()));
+	EXPECT_FALSE(forwards.IsCollision(test3, Vector3d()));
+	EXPECT_FALSE(forwards.IsCollision(test4, Vector3d()));
+	EXPECT_FALSE(forwards.IsCollision(test5, Vector3d()));
 
 	//backwards
-	EXPECT_TRUE(backwards.IsCollision(test1));
-	EXPECT_FALSE(backwards.IsCollision(test2));
-	EXPECT_TRUE(backwards.IsCollision(test3));
-	EXPECT_TRUE(backwards.IsCollision(test4));
-	EXPECT_FALSE(backwards.IsCollision(test5));
+	EXPECT_TRUE(backwards.IsCollision(test1, Vector3d()));
+	EXPECT_FALSE(backwards.IsCollision(test2, Vector3d()));
+	EXPECT_TRUE(backwards.IsCollision(test3, Vector3d()));
+	EXPECT_TRUE(backwards.IsCollision(test4, Vector3d()));
+	EXPECT_FALSE(backwards.IsCollision(test5, Vector3d()));
 }
 
 TEST(SphereCollision, Ray)
@@ -140,13 +140,13 @@ TEST(SphereCollision, Ray)
 	Sphere test7(Vector3d(-1, -1, -20), 1);	// behind ray
 	
 
-	EXPECT_TRUE(ray.IsCollision(test1));
-	EXPECT_TRUE(ray.IsCollision(test2));
-	EXPECT_TRUE(ray.IsCollision(test3));
-	EXPECT_TRUE(ray.IsCollision(test4));
-	EXPECT_FALSE(ray.IsCollision(test5));	// set to true if we ever care about rays being in front of sphere origin, but still in sphere
-	EXPECT_FALSE(ray.IsCollision(test6));
-	EXPECT_FALSE(ray.IsCollision(test7));
+	EXPECT_TRUE(ray.IsCollision(test1, Vector3d()));
+	EXPECT_TRUE(ray.IsCollision(test2, Vector3d()));
+	EXPECT_TRUE(ray.IsCollision(test3, Vector3d()));
+	EXPECT_TRUE(ray.IsCollision(test4, Vector3d()));
+	EXPECT_FALSE(ray.IsCollision(test5, Vector3d()));	// set to true if we ever care about rays being in front of sphere origin, but still in sphere
+	EXPECT_FALSE(ray.IsCollision(test6, Vector3d()));
+	EXPECT_FALSE(ray.IsCollision(test7, Vector3d()));
 }
 
 TEST(RayCollision, Ray)

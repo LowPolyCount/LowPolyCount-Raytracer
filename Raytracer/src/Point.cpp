@@ -19,14 +19,14 @@ Point::Point(const Vector3d& pos)
 
 Point::~Point() {}
 
-bool Point::IsCollision(const CollidableObject& rhs) const
+bool Point::IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect)
 {
 	switch (rhs.GetType())
 	{
 	case WorldType::CT_Point:
-		return IsCollisionPoint(static_cast<const Point&>(rhs));
+		return IsCollisionPoint(static_cast<const Point&>(rhs), pointOfIntersect);
 	case WorldType::CT_Sphere:
-		return IsCollisionSphere(static_cast<const Sphere&>(rhs));
+		return IsCollisionSphere(static_cast<const Sphere&>(rhs), pointOfIntersect);
 	default:
 		break;
 	}
@@ -44,14 +44,20 @@ void Point::Init(const DeserializeData& data)
 	Init(data.m_mapVector.at(DeserializeData::POSITION));
 }
 
-bool Point::IsCollisionPoint(const Point& rhs) const
+bool Point::IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect) const
+{
+	assert(true);
+	return false;
+}
+
+bool Point::IsCollisionPoint(const Point& rhs, Vector3d& pointOfIntersect)
 {
 	return (*this) == rhs;
 }
 
-bool Point::IsCollisionSphere(const Sphere& rhs) const
+bool Point::IsCollisionSphere(const Sphere& rhs, Vector3d& pointOfIntersect)
 {
-	return rhs.IsCollision(*this);
+	return rhs.IsCollision(*this, pointOfIntersect);
 }
 
 TEST(PointCollision, Point)
@@ -60,8 +66,8 @@ TEST(PointCollision, Point)
 	Point test2(Vector3d(5, 5, 5));
 	Sphere sphr(Vector3d(.5, .5, .5), 1);
 
-	EXPECT_TRUE(test1.IsCollision(sphr));
-	EXPECT_FALSE(test2.IsCollision(sphr));
+	EXPECT_TRUE(test1.IsCollision(sphr, Vector3d()));
+	EXPECT_FALSE(test2.IsCollision(sphr, Vector3d()));
 }
 
 TEST(SphereCollision, Point)
@@ -71,8 +77,8 @@ TEST(SphereCollision, Point)
 	Sphere test3(Vector3d(5, 5, 5), 1);
 	Sphere sphr(Vector3d(.5, .5, .5), 1);
 
-	EXPECT_TRUE(test1.IsCollision(sphr));
-	EXPECT_TRUE(test2.IsCollision(sphr));
-	EXPECT_FALSE(test3.IsCollision(sphr));
+	EXPECT_TRUE(test1.IsCollision(sphr, Vector3d()));
+	EXPECT_TRUE(test2.IsCollision(sphr, Vector3d()));
+	EXPECT_FALSE(test3.IsCollision(sphr, Vector3d()));
 }
 

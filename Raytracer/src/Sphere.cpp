@@ -48,7 +48,7 @@ RGBA Sphere::GetLastMaterialHit() const
 	return m_lastMaterialHit;
 }
 
-bool Sphere::IsCollision(const CollidableObject& rhs) const
+bool Sphere::IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect) const
 {
 	switch (rhs.GetType())
 	{
@@ -57,7 +57,7 @@ bool Sphere::IsCollision(const CollidableObject& rhs) const
 	case WorldType::CT_Sphere:
 		return IsCollisionSphere(static_cast<const Sphere&>(rhs));
 	case WorldType::CT_Ray:
-		return static_cast<const Ray&>(rhs).IsCollision(*this);
+		return static_cast<const Ray&>(rhs).IsCollision(*this, pointOfIntersect);
 	default:
 		cout << "DEFAULT IsCollision" << endl;
 		break;
@@ -84,8 +84,8 @@ TEST(PointCollision, Sphere)
 	Point test2(Vector3d(5, 5, 5));
 	Sphere sphr(Vector3d(.5, .5, .5), 1);
 
-	EXPECT_TRUE(sphr.IsCollision(test1));
-	EXPECT_FALSE(sphr.IsCollision(test2));
+	EXPECT_TRUE(sphr.IsCollision(test1, Vector3d()));
+	EXPECT_FALSE(sphr.IsCollision(test2, Vector3d()));
 }
 
 TEST(SphereCollision, Sphere)
@@ -95,9 +95,9 @@ TEST(SphereCollision, Sphere)
 	Sphere test3(Vector3d(5, 5, 5), 1);
 	Sphere sphr(Vector3d(.5, .5, .5), 1);
 
-	EXPECT_TRUE(sphr.IsCollision(test1));
-	EXPECT_TRUE(sphr.IsCollision(test2));
-	EXPECT_FALSE(sphr.IsCollision(test3));
+	EXPECT_TRUE(sphr.IsCollision(test1, Vector3d()));
+	EXPECT_TRUE(sphr.IsCollision(test2, Vector3d()));
+	EXPECT_FALSE(sphr.IsCollision(test3, Vector3d()));
 }
 
 TEST(RayCollision, Sphere)

@@ -13,13 +13,20 @@ CollidableObject::~CollidableObject()
 {
 }
 
-bool CollidableObject::IsCollision(const CollidableObject& rhs) const
+/*bool CollidableObject::IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect)
 {
-	cout << "Calling IsCollision in ICollidable!" << endl;
+	assert(false);
 	return false;
-}
+}*/
 
 RGBA CollidableObject::GetLastMaterialHit() const
 { 
+	assert(false);
 	return COLOR_WHITE; 
+}
+
+Vector3d CollidableObject::GetLastRayHit() const
+{
+	assert(false);
+	return Vector3d();
 }

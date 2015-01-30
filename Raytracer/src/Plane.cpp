@@ -17,6 +17,12 @@ Plane::~Plane()
 {
 }
 
+bool Plane::IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect) const
+{
+	assert(true);
+	return false;
+}
+
 void Plane::Init(const DeserializeData& data)
 {
 	Init(data.m_mapVector.at(DeserializeData::POSITION), data.m_mapVector.at(DeserializeData::DIRECTION));

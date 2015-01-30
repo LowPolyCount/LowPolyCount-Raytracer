@@ -13,7 +13,7 @@ public:
 	~Sphere();
 	virtual void Init(const Vector3d& inPos, double inRadius);
 	virtual void Init(const DeserializeData& data);
-	virtual bool IsCollision(const CollidableObject& rhs) const;
+	virtual bool IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect) const;
 	virtual RGBA GetLastMaterialHit() const;
 
 
