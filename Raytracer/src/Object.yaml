@@ -22,7 +22,7 @@
   position: [0, 0, 2]
 - type: infiniteplane
   position: [0, 10, 0]
-  direction: [0, 1, 0]
+  direction: [0, 0, 0]
   material: [0, 100, 50]
 - type: camera
   position: [0, 0, 100]

@@ -12,7 +12,6 @@ public:
 	InfinitePlane(const Vector3d& pos, const Vector3d& dir);
 	virtual ~InfinitePlane();
 
-	virtual bool IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect) const;
 	virtual RGBA GetLastMaterialHit() const;
 
 	void Init(const DeserializeData& data);

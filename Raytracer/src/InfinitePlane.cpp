@@ -23,22 +23,6 @@ InfinitePlane::~InfinitePlane()
 
 }
 
-bool InfinitePlane::IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect) const
-{
-	// TODO: Handle this in a more generic way
-	switch (rhs.GetType())
-	{
-	case WorldType::CT_Ray:
-		return static_cast<const Ray&>(rhs).IsCollision(*this, pointOfIntersect);
-	default:
-		cout << "DEFAULT IsCollision" << endl;
-		assert(true);
-		break;
-	}
-
-	return false;
-}
-
 void InfinitePlane::Init(const DeserializeData& data)
 {
 	Init(data.m_mapVector.at(DeserializeData::POSITION), data.m_mapVector.at(DeserializeData::DIRECTION));
@@ -64,8 +48,3 @@ bool InfinitePlane::operator == (const InfinitePlane& rhs) const
 {
 	return m_position == rhs.GetPosition() && m_direction == rhs.GetDirection();
 }
-
-/*TEST(InfinitePlaneCollision, InfinitePlane)
-{
-
-}*/

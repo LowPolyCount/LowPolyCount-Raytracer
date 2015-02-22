@@ -4,6 +4,7 @@
 #include <cmath>
 #include "Camera.h"
 #include "DeserializeData.h"
+#include "Ray.h"
 
 using namespace std;
 

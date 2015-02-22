@@ -3,6 +3,7 @@
 #include <gtest\gtest.h>
 #include "RendererSDL.h"
 #include "YamlFile.h"
+#include "Ray.h"
 
 using namespace std;
 

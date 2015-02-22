@@ -11,7 +11,6 @@ public:
 	Ray();
 	Ray(const Vector3d& pos, const Vector3d& dir);
 	virtual ~Ray();
-	virtual bool IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect) const;
 
 	void Init(const DeserializeData& data);
 	void Init(const Vector3d& pos, const Vector3d& dir);
@@ -23,11 +22,6 @@ public:
 	inline void SetDirection(const Vector3d& dir) { m_direction = dir; }
 
 private:
-	bool IsCollisionPoint(const Point& rhs, Vector3d& pointOfIntersect) const;
-	bool IsCollisionSphere(const Sphere& rhs, Vector3d& pointOfIntersect) const;
-	bool IsCollisionRay(const Ray& rhs, Vector3d& pointOfIntersect) const;
-	bool IsCollisionInfinitePlane(const InfinitePlane& rhs, Vector3d& pointOfIntersect) const;
-
 	Point m_position;
 	Vector3d m_direction;
 };
