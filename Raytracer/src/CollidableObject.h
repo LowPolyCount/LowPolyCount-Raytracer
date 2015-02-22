@@ -11,6 +11,5 @@ public:
 	virtual ~CollidableObject();
 	virtual bool IsCollision(const CollidableObject& rhs, Vector3d& pointOfIntersect) const =0;
 	virtual RGBA GetLastMaterialHit() const;
-	virtual Vector3d GetLastRayHit() const;
 };
 

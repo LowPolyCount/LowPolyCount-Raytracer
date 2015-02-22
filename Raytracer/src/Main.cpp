@@ -36,5 +36,7 @@ int main(int argc, char **argv)
 
 	//delete loader;
 
+	std::cin >> t;
+
 	return returnValue;
 }

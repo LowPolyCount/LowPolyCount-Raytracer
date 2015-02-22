@@ -47,7 +47,7 @@ void TestDeserializer::TestTokenizeImage(const std::string& line, const size_t d
 	Deserializer::TokenizeImage(line, dataStart, returnData);
 }
 
-const char* TEST_SPHERE = "sphere 0.0 0 0 5";
+/*const char* TEST_SPHERE = "sphere 0.0 0 0 5";
 const char* TEST_POINT = "point 0 1 2";
 const char* TEST_CAMERA = "camera 1 2 3 1 2 3";
 const char* TEST_IMAGE = "image 640 480";
@@ -133,4 +133,4 @@ TEST(TestLineBuild, TestDeserializer)
 	EXPECT_EQ(testImage.m_mapVector[DeserializeData::POSITION], Vector3d(640, 480, 0));
 
 	EXPECT_EQ(testSphere.m_mapDouble[DeserializeData::RADIUS], 5);
-}
+}*/

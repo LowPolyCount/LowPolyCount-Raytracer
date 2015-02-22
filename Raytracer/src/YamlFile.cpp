@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <algorithm>
 #include "YamlFile.h"
 #include "Vector3d.h"
 
@@ -8,6 +9,7 @@ static const string SPHERE = "sphere";
 static const string POINT = "point";
 static const string CAMERA = "camera";
 static const string IMAGE = "image";
+static const string INFINITE_PLANE = "infiniteplane";
 
 static const string VAR_X = "x";
 static const string VAR_Y = "y";
@@ -96,7 +98,9 @@ DeserializeData YamlFile::DeseralizeYamlObject(const YAML::Node data) const
 {
 	DeserializeData returnData;
 
-	const std::string typeName = data[TYPE].as<std::string>();
+	std::string typeName = data[TYPE].as<std::string>();
+	//std::transform(typeName.begin(), typeName.end(), typeName.begin(), ::tolower);
+
 	returnData.m_type = FindType(typeName);
 
 	switch (returnData.m_type)
@@ -113,6 +117,9 @@ DeserializeData YamlFile::DeseralizeYamlObject(const YAML::Node data) const
 	case WorldObject::WorldType::CT_Image:
 		TokenizeImage(data, returnData);
 		break;
+	case WorldObject::WorldType::CT_InfinitePlane:
+		TokenizeInfinitePlane(data, returnData);
+		break;
 	default:
 		returnData.m_type = WorldObject::WorldType::CT_Unknown;
 		break;
@@ -126,6 +133,10 @@ WorldObject::WorldType YamlFile::FindType(const std::string& stringType) const
 	if (stringType.compare(SPHERE) == 0)
 	{
 		return WorldObject::WorldType::CT_Sphere;
+	}
+	else if (stringType.compare(INFINITE_PLANE) == 0)
+	{
+		return WorldObject::WorldType::CT_InfinitePlane;
 	}
 	else if (stringType.compare(POINT) == 0)
 	{
@@ -167,6 +178,14 @@ void YamlFile::TokenizeCamera(const YAML::Node data, DeserializeData& returnData
 void YamlFile::TokenizeImage(const YAML::Node data, DeserializeData& returnData) const
 {
 	returnData.m_mapVector[DeserializeData::POSITION] = data[RESOLUTION].as<Vector3d>();
+}
+
+void YamlFile::TokenizeInfinitePlane(const YAML::Node data, DeserializeData& returnData) const
+{
+	returnData.m_mapVector[DeserializeData::MATERIAL] = data[MATERIAL].as<Vector3d>();
+	returnData.m_mapVector[DeserializeData::POSITION] = data[POSITION].as<Vector3d>();
+	returnData.m_mapVector[DeserializeData::DIRECTION] = data[DIRECTION].as<Vector3d>();
+
 }
 
 TEST(dataLoad, YamlFile)

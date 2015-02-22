@@ -16,6 +16,9 @@ public:
 	inline const Vector3d& GetLowerRight() const { return m_lowerRight; }
 	double GetWidth() const;
 	double GetHeight() const;
+
+	Vector3d GetPosition() const;
+	Vector3d GetDirection() const;
 private:
 	Vector3d	m_upperLeft;
 	Vector3d	m_lowerRight;

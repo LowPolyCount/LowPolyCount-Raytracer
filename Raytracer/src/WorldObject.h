@@ -11,6 +11,7 @@ public:
 		CT_Point,
 		CT_Ray,
 		CT_Plane,
+		CT_InfinitePlane,
 
 		// other types of objects
 		CT_Image,

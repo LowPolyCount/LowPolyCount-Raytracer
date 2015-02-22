@@ -12,6 +12,7 @@ static const string SPHERE("sphere");
 static const string POINT("point");
 static const string CAMERA("camera");
 static const string IMAGE("image");
+static const string INFINITE_PLANE("infiniteplane");
 static const int STRING_SIZE = 100;
 
 Deserializer::Deserializer()
@@ -126,6 +127,10 @@ WorldObject::WorldType Deserializer::FindType(const std::string& stringType) con
 	else if (stringType.compare(IMAGE) == 0)
 	{
 		return WorldObject::WorldType::CT_Image;
+	}
+	else if (stringType.compare(INFINITE_PLANE))
+	{
+		return WorldObject::WorldType::CT_InfinitePlane;
 	}
 
 	return WorldObject::WorldType::CT_Unknown;

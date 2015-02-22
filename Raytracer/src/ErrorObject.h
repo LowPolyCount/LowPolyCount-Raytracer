@@ -6,6 +6,7 @@ class ErrorObject :
 	public WorldObject
 {
 public:
+	ErrorObject();
 	ErrorObject(const std::string& error);
 	virtual ~ErrorObject();
 	virtual void Init(const DeserializeData& data){}
