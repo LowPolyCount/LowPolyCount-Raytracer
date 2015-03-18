@@ -2,19 +2,22 @@
 #include "Vector3d.h"
 #include "CollidableObject.h"
 #include "Point.h"
-#include "InfinitePlane.h"
 
+//@todo: Can eventually merge this into the regular plane object
 struct DeserializeData;
-class Ray : public CollidableObject
+class InfinitePlane : public CollidableObject
 {
 public:
-	Ray();
-	Ray(const Vector3d& pos, const Vector3d& dir);
-	virtual ~Ray();
+	InfinitePlane();
+	InfinitePlane(const Vector3d& pos, const Vector3d& dir);
+	virtual ~InfinitePlane();
+
+	virtual RGBA GetLastMaterialHit() const;
 
 	void Init(const DeserializeData& data);
 	void Init(const Vector3d& pos, const Vector3d& dir);
-	bool operator ==(const Ray& rhs) const;
+	bool operator ==(const InfinitePlane& rhs) const;
+	//@todo: Add Move operation
 
 	inline const Vector3d& GetPosition() const { return m_position.GetPosition(); }
 	inline const Vector3d& GetDirection() const { return m_direction; }
@@ -24,5 +27,5 @@ public:
 private:
 	Point m_position;
 	Vector3d m_direction;
+	RGBA m_lastMaterialHit;
 };
-

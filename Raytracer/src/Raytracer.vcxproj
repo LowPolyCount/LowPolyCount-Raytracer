@@ -96,7 +96,9 @@
     <ClInclude Include="Factory.h" />
     <ClInclude Include="CollidableObject.h" />
     <ClInclude Include="IFileLoader.h" />
+    <ClInclude Include="InfinitePlane.h" />
     <ClInclude Include="IRenderer.h" />
+    <ClInclude Include="LpcMath.h" />
     <ClInclude Include="RaytracerTypes.h" />
     <ClInclude Include="RendererSDL.h" />
     <ClInclude Include="Point.h" />
@@ -119,6 +121,8 @@
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="CollidableObject.cpp" />
     <ClCompile Include="IFileLoader.cpp" />
+    <ClCompile Include="InfinitePlane.cpp" />
+    <ClCompile Include="LpcMath.cpp" />
     <ClCompile Include="RendererSDL.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Ray.cpp" />

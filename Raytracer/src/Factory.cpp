@@ -29,6 +29,8 @@ Factory::Factory()
 	AddType<Plane>(WorldObject::WorldType::CT_Plane);
 	AddType<Camera>(WorldObject::WorldType::CT_Camera);
 	AddType<RendererSDL>(WorldObject::WorldType::CT_Image);
+	AddType<InfinitePlane>(WorldObject::WorldType::CT_InfinitePlane);
+	AddType<ErrorObject>(WorldObject::WorldType::CT_Unknown);
 }
 
 
@@ -43,6 +45,7 @@ void Factory::AddType(WorldObject::WorldType worldType)
 	m_templateMap.insert(std::make_pair(worldType, function));
 }
 
+//TODO: Return a smartpointer
 WorldObject* Factory::Create(const DeserializeData& data)
 {
 	WorldObject* returnValue = nullptr;

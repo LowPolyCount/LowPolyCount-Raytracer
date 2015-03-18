@@ -103,6 +103,12 @@
     <ClInclude Include="RaytracerTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InfinitePlane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LpcMath.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -161,6 +167,12 @@
     </ClCompile>
     <ClCompile Include="ErrorObject.cpp">
       <Filter>Source Files\CollisionThings</Filter>
+    </ClCompile>
+    <ClCompile Include="InfinitePlane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LpcMath.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

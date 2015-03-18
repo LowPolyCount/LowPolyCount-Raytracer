@@ -4,6 +4,7 @@
 #include <memory>
 #include <gtest\gtest.h>
 #include "WorldManager.h"
+#include "LpcMath.h"
 #include "Ray.h"
 #include "Deserializer.h"
 #include "Factory.h"
@@ -125,13 +126,25 @@ void WorldManager::RunThroughSimulation()
 	}
 }
 
+struct HitInformaionStruct
+{
+	RGBA m_hitMaterial;
+	double m_distance;
+};
+
 RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 {
+	std::vector<HitInformaionStruct> hitsDetected;
+	Vector3d pointOfIntersect;
 	for (auto i = m_objects.begin(); i != m_objects.end(); ++i)
 	{
-		if ((*i)->IsCollision(testRay))
+		if (LpcMath::IsCollision(testRay, (**i), pointOfIntersect))
 		{
+			//HitInformaionStruct hitInfo;
+			//hitInfo.m_hitMaterial = (*i)->GetLastMaterialHit();
+			//hitInfo.m_distance = (*i)->IstestRay.GetPosition() 
 			return (*i)->GetLastMaterialHit();
+
 		}
 	}
 

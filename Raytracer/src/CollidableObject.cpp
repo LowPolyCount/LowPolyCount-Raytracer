@@ -13,13 +13,8 @@ CollidableObject::~CollidableObject()
 {
 }
 
-bool CollidableObject::IsCollision(const CollidableObject& rhs) const
-{
-	cout << "Calling IsCollision in ICollidable!" << endl;
-	return false;
-}
-
 RGBA CollidableObject::GetLastMaterialHit() const
 { 
+	assert(false);
 	return COLOR_WHITE; 
 }
