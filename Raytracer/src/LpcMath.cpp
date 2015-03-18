@@ -96,20 +96,16 @@ bool LpcMath::IsCollisionRay(const Ray& obj1, const Ray& obj2, Vector3d& pointOf
 
 bool LpcMath::IsCollisionInfinitePlane(const Ray& obj1, const InfinitePlane& obj2, Vector3d& pointOfIntersect)
 {
-	const Vector3d u = obj1.GetPosition();
-	const Vector3d ur = obj1.GetDirection();
-	const Vector3d p = obj2.GetPosition();
-	const Vector3d n = obj2.GetDirection();
-	const Vector3d pr = u - obj2.GetPosition();
-
-	const double k = -(n.DotProduct(pr) / n.DotProduct(ur));
-
-	if (k >= 0)
+	const double denom = obj2.GetDirection().DotProduct(obj1.GetDirection());
+	if (abs(denom) > DBL_EPSILON)
 	{
-		pointOfIntersect = u + ur*k;
-		return true;
+		const double t = (obj2.GetPosition() - obj1.GetPosition()).DotProduct(obj2.GetDirection()) / denom;
+		if (t >= 0) 
+		{
+			pointOfIntersect = obj1.GetPosition() + obj1.GetDirection()*t;
+			return true;
+		}
 	}
-
 	return false;
 }
 
@@ -119,6 +115,7 @@ TEST(PointCollision, Ray)
 	Ray forwards(Vector3d(1, 1, 1), Vector3d(0, 0, 1));
 	Ray backwards(Vector3d(1, 1, 1), Vector3d(0, 0, -1));
 	Point test1(Vector3d(1, 1, 1));		// origin
+
 	Point test2(Vector3d(1, 1, 2));		// in front
 	Point test3(Vector3d(1, 1, 0));		// behind
 	Point test4(Vector3d(1, 1, -1));	// behind
@@ -186,14 +183,20 @@ TEST(InfinitePlaneCollision, Ray)
 	Ray test4(Vector3d(-5, -5, -5), Vector3d(0, 1, 0));
 	Vector3d test4Intersect;
 
+	Ray test5(Vector3d(0, -10, 0), Vector3d(0, 1, 0));	// opposite side of test1
+	Vector3d test5Intersect;
+
+
 	EXPECT_TRUE(LpcMath::IsCollision(test1, plane, test1Intersect));
 	EXPECT_FALSE(LpcMath::IsCollision(test2, plane, Vector3d()));
 	EXPECT_TRUE(LpcMath::IsCollision(test3, plane, test3Intersect));
 	EXPECT_TRUE(LpcMath::IsCollision(test4, plane, test4Intersect));
+	EXPECT_TRUE(LpcMath::IsCollision(test5, plane, test5Intersect));
 
 	EXPECT_EQ(Vector3d(0, 0, 0), test1Intersect);
 	EXPECT_EQ(Vector3d(0, 0, 0), test3Intersect);
 	EXPECT_EQ(Vector3d(-5, 0, -5), test4Intersect);
+	EXPECT_EQ(Vector3d(0, 0, 0), test5Intersect);
 }
 
 TEST(RayCollision, Ray)
