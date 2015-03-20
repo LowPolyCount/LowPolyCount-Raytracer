@@ -17,7 +17,6 @@ public:
 	double GetWidth() const;
 	double GetHeight() const;
 
-	Vector3d GetPosition() const;
 	Vector3d GetDirection() const;
 private:
 	Vector3d	m_upperLeft;

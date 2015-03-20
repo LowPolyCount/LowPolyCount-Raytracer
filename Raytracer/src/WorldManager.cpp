@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <limits>
 #include <gtest\gtest.h>
 #include "WorldManager.h"
 #include "LpcMath.h"
@@ -118,10 +119,7 @@ void WorldManager::RunThroughSimulation()
 		for (int i = 0; i<width; i++)
 		{
 			RGBA hitColor = FindIfIntersect(m_currentScene[i][j]);
-			//if (FindIfIntersect(m_currentScene[i][j]))
-			//{
 			m_image->SetPixel(i, j, hitColor);
-			//}
 		}
 	}
 }
@@ -140,12 +138,28 @@ RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 	{
 		if (LpcMath::IsCollision(testRay, (**i), pointOfIntersect))
 		{
-			//HitInformaionStruct hitInfo;
-			//hitInfo.m_hitMaterial = (*i)->GetLastMaterialHit();
-			//hitInfo.m_distance = (*i)->IstestRay.GetPosition() 
-			return (*i)->GetLastMaterialHit();
-
+			HitInformaionStruct hitInfo;
+			hitInfo.m_hitMaterial = (*i)->GetLastMaterialHit();
+			hitInfo.m_distance = ((*i)->GetPosition() - testRay.GetPosition()).length();
+			hitsDetected.push_back(hitInfo);
 		}
+	}
+
+	if (hitsDetected.size() > 0)
+	{
+		HitInformaionStruct closestHit;
+		closestHit.m_hitMaterial = COLOR_WHITE;
+		closestHit.m_distance = std::numeric_limits<double>::max();
+
+		for (auto i = hitsDetected.begin(); i != hitsDetected.end(); ++i)
+		{
+			if ((*i).m_distance >= 0 && (*i).m_distance < closestHit.m_distance)
+			{
+				closestHit = *i;
+			}
+		}
+
+		return closestHit.m_hitMaterial;
 	}
 
 	return COLOR_WHITE;
