@@ -105,53 +105,53 @@ DeserializeData YamlFile::DeseralizeYamlObject(const YAML::Node data) const
 
 	switch (returnData.m_type)
 	{
-	case WorldObject::WorldType::CT_Sphere:
+	case Object::ObjectType::CT_Sphere:
 		TokenizeSphere(data, returnData);
 		break;
-	case WorldObject::WorldType::CT_Point:
+	case Object::ObjectType::CT_Point:
 		TokenizePoint(data, returnData);
 		break;
-	case WorldObject::WorldType::CT_Camera:
+	case Object::ObjectType::CT_Camera:
 		TokenizeCamera(data, returnData);
 		break;
-	case WorldObject::WorldType::CT_Image:
+	case Object::ObjectType::CT_Image:
 		TokenizeImage(data, returnData);
 		break;
-	case WorldObject::WorldType::CT_InfinitePlane:
+	case Object::ObjectType::CT_InfinitePlane:
 		TokenizeInfinitePlane(data, returnData);
 		break;
 	default:
-		returnData.m_type = WorldObject::WorldType::CT_Unknown;
+		returnData.m_type = Object::ObjectType::CT_Unknown;
 		break;
 	}
 
 	return returnData;
 }
 
-WorldObject::WorldType YamlFile::FindType(const std::string& stringType) const
+Object::ObjectType YamlFile::FindType(const std::string& stringType) const
 {
 	if (stringType.compare(SPHERE) == 0)
 	{
-		return WorldObject::WorldType::CT_Sphere;
+		return Object::ObjectType::CT_Sphere;
 	}
 	else if (stringType.compare(INFINITE_PLANE) == 0)
 	{
-		return WorldObject::WorldType::CT_InfinitePlane;
+		return Object::ObjectType::CT_InfinitePlane;
 	}
 	else if (stringType.compare(POINT) == 0)
 	{
-		return WorldObject::WorldType::CT_Point;
+		return Object::ObjectType::CT_Point;
 	}
 	else if (stringType.compare(CAMERA) == 0)
 	{
-		return WorldObject::WorldType::CT_Camera;
+		return Object::ObjectType::CT_Camera;
 	}
 	else if (stringType.compare(IMAGE) == 0)
 	{
-		return WorldObject::WorldType::CT_Image;
+		return Object::ObjectType::CT_Image;
 	}
 
-	return WorldObject::WorldType::CT_Unknown;
+	return Object::ObjectType::CT_Unknown;
 }
 
 void YamlFile::TokenizeSphere(const YAML::Node data, DeserializeData& returnData) const
@@ -195,19 +195,19 @@ TEST(dataLoad, YamlFile)
 	ASSERT_TRUE(test.GetDataFromFile());
 	const std::vector<DeserializeData>& result = test.GetData();
 
-	EXPECT_EQ(result[0].m_type, WorldObject::WorldType::CT_Sphere);
+	EXPECT_EQ(result[0].m_type, Object::ObjectType::CT_Sphere);
 	EXPECT_EQ(result[0].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(0, 1, 2));
 	EXPECT_EQ(result[0].m_mapVector.at(DeserializeData::MapIds::MATERIAL), Vector3d(100, 101, 102));
 	EXPECT_EQ(result[0].m_mapDouble.at(DeserializeData::MapIds::RADIUS), 2);
 
-	EXPECT_EQ(result[1].m_type, WorldObject::WorldType::CT_Point);
+	EXPECT_EQ(result[1].m_type, Object::ObjectType::CT_Point);
 	EXPECT_EQ(result[1].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(-1, -2, -3));
 
-	EXPECT_EQ(result[2].m_type, WorldObject::WorldType::CT_Camera);
+	EXPECT_EQ(result[2].m_type, Object::ObjectType::CT_Camera);
 	EXPECT_EQ(result[2].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(1, 1, 1));
 	EXPECT_EQ(result[2].m_mapVector.at(DeserializeData::MapIds::DIRECTION), Vector3d(1, 1, 1));
 
-	EXPECT_EQ(result[3].m_type, WorldObject::WorldType::CT_Image);
+	EXPECT_EQ(result[3].m_type, Object::ObjectType::CT_Image);
 	EXPECT_EQ(result[3].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(256, 640, 0));
 }
 

@@ -70,7 +70,7 @@ DeserializeData Deserializer::DeseralizeYamlObject(const YAML::Node data) const
 
 	/*switch (returnData.m_type)
 	{
-	case  WorldObject::WorldType::CT_Sphere:
+	case  Object::WorldType::CT_Sphere:
 		cout << typeName << endl;
 		break;
 	default:
@@ -92,16 +92,16 @@ DeserializeData Deserializer::DeseralizeLine(const std::string& line) const
 
 	switch (returnData.m_type)
 	{
-	case WorldObject::WorldType::CT_Sphere:
+	case Object::ObjectType::CT_Sphere:
 		TokenizeSphere(line, dataStart, returnData);
 		break;
-	case WorldObject::WorldType::CT_Point:
+	case Object::ObjectType::CT_Point:
 		TokenizePoint(line, dataStart, returnData);
 		break;
-	case WorldObject::WorldType::CT_Camera:
+	case Object::ObjectType::CT_Camera:
 		TokenizeCamera(line, dataStart, returnData);
 		break;
-	case WorldObject::WorldType::CT_Image:
+	case Object::ObjectType::CT_Image:
 		TokenizeImage(line, dataStart, returnData);
 		break;
 	default:
@@ -110,30 +110,30 @@ DeserializeData Deserializer::DeseralizeLine(const std::string& line) const
 	return returnData;
 }
 
-WorldObject::WorldType Deserializer::FindType(const std::string& stringType) const
+Object::ObjectType Deserializer::FindType(const std::string& stringType) const
 {
 	if (stringType.compare(SPHERE) == 0)
 	{
-		return WorldObject::WorldType::CT_Sphere;
+		return Object::ObjectType::CT_Sphere;
 	}
 	else if (stringType.compare(POINT) == 0)
 	{
-		return WorldObject::WorldType::CT_Point;
+		return Object::ObjectType::CT_Point;
 	}
 	else if (stringType.compare(CAMERA) == 0)
 	{
-		return WorldObject::WorldType::CT_Camera;
+		return Object::ObjectType::CT_Camera;
 	}
 	else if (stringType.compare(IMAGE) == 0)
 	{
-		return WorldObject::WorldType::CT_Image;
+		return Object::ObjectType::CT_Image;
 	}
 	else if (stringType.compare(INFINITE_PLANE))
 	{
-		return WorldObject::WorldType::CT_InfinitePlane;
+		return Object::ObjectType::CT_InfinitePlane;
 	}
 
-	return WorldObject::WorldType::CT_Unknown;
+	return Object::ObjectType::CT_Unknown;
 }
 
 void Deserializer::TokenizeSphere(const std::string& line, const size_t dataStart, DeserializeData& returnData) const
@@ -199,14 +199,14 @@ TEST(dataLoad, Deserializer)
 
 	const std::vector<DeserializeData>& result = test.GetData();
 
-	EXPECT_EQ(result[0].m_type, WorldObject::WorldType::CT_Sphere);
+	EXPECT_EQ(result[0].m_type, Object::ObjectType::CT_Sphere);
 	EXPECT_EQ(result[0].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(0, 1, 2));
 	EXPECT_EQ(result[0].m_mapDouble.at(DeserializeData::MapIds::RADIUS), 2);
 
-	EXPECT_EQ(result[1].m_type, WorldObject::WorldType::CT_Point);
+	EXPECT_EQ(result[1].m_type, Object::ObjectType::CT_Point);
 	EXPECT_EQ(result[1].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(-1, -2, -3));
 
-	EXPECT_EQ(result[2].m_type, WorldObject::WorldType::CT_Camera);
+	EXPECT_EQ(result[2].m_type, Object::ObjectType::CT_Camera);
 	EXPECT_EQ(result[2].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(1, 1, 1));
 	EXPECT_EQ(result[2].m_mapVector.at(DeserializeData::MapIds::DIRECTION), Vector3d(1, 1, 1));
 //	EXPECT_EQ(result[2].m_mapPlane.at(DeserializeData::MapIds::BACKVIEWFRUSTRUM), Plane()
@@ -216,7 +216,7 @@ TEST(dataLoad, Deserializer)
 //		m_nearPlane.Init(Vector3d(-PLANE_WIDTH + m_position.x, -PLANE_HEIGHT + m_position.y, m_position.z + PLANE_DEPTH),
 		//Vector3d(PLANE_WIDTH + m_position.x, PLANE_HEIGHT + m_position.y, m_position.z + PLANE_DEPTH));
 
-	EXPECT_EQ(result[3].m_type, WorldObject::WorldType::CT_Image);
+	EXPECT_EQ(result[3].m_type, Object::ObjectType::CT_Image);
 	EXPECT_EQ(result[3].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(256, 640, 0));
 }
 

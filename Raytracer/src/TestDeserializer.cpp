@@ -22,7 +22,7 @@ DeserializeData TestDeserializer::TestDeseralizeLine(const std::string& line) co
 	return Deserializer::DeseralizeLine(line);
 }
 
-WorldObject::WorldType TestDeserializer::TestFindType(const std::string& stringType) const
+Object::ObjectType TestDeserializer::TestFindType(const std::string& stringType) const
 {
 	return Deserializer::FindType(stringType);
 }

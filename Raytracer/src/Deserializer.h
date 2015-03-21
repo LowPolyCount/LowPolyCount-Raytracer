@@ -3,7 +3,7 @@
 #include <vector>
 #include "IFileLoader.h"
 #include "DeserializeData.h"
-#include "WorldObject.h"
+#include "Object.h"
 
 //@TODO: Remove file. Not longer used.
 class Deserializer: public IFileLoader
@@ -22,7 +22,7 @@ protected:
 	void TokenizePoint(const std::string& line, const size_t dataStart, DeserializeData& returnData) const;
 	void TokenizeCamera(const std::string& line, const size_t dataStart, DeserializeData& returnData) const;
 	void TokenizeImage(const std::string& line, const size_t dataStart, DeserializeData& returnData) const;
-	WorldObject::WorldType FindType(const std::string& stringType) const;
+	Object::ObjectType FindType(const std::string& stringType) const;
 	std::vector<double> FindAllNumbers(const std::string& line, const size_t dataStart) const;
 
 	std::vector<DeserializeData> m_data;

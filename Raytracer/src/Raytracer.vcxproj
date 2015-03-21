@@ -111,7 +111,7 @@
     <ClInclude Include="Vector3d.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="WorldManager.h" />
-    <ClInclude Include="WorldObject.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="YamlFile.h" />
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +137,7 @@
     <ClCompile Include="Vector3d.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="WorldManager.cpp" />
-    <ClCompile Include="WorldObject.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="YamlFile.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,9 @@
 #pragma once
-#include "WorldObject.h"
+#include "Object.h"
 #include <string>
 
 class ErrorObject :
-	public WorldObject
+	public Object
 {
 public:
 	ErrorObject();

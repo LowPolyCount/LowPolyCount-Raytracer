@@ -1,13 +1,13 @@
 #pragma once
 
-#include "WorldObject.h"
+#include "Object.h"
 #include "RaytracerTypes.h"
 #include "Vector3d.h"
 
-class CollidableObject: public WorldObject
+class CollidableObject: public Object
 {
 public:
-	CollidableObject(WorldType inType);
+	CollidableObject(ObjectType inType);
 	virtual ~CollidableObject();
 	virtual RGBA GetLastMaterialHit() const;
 	virtual const Vector3d& GetPosition() const{ return m_position; }

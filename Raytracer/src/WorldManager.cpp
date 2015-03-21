@@ -59,21 +59,21 @@ bool WorldManager::Init(const std::string& fileName)
 	for (auto iter = worldData.begin(); iter != worldData.end(); ++iter)
 	{
 		const DeserializeData objData = *iter;
-		WorldObject* worldObj = factoryMethod.Create(objData);
+		Object* worldObj = factoryMethod.Create(objData);
 		
 		switch (worldObj->GetType())
 		{
-		case WorldObject::WorldType::CT_Camera:
+		case Object::ObjectType::CT_Camera:
 			m_camera = static_cast<Camera*>(worldObj);
 			break;
-		case WorldObject::WorldType::CT_Image:
+		case Object::ObjectType::CT_Image:
 			m_image = static_cast<IRenderer*>(worldObj);
 			break;
-		case WorldObject::WorldType::CT_Error:
+		case Object::ObjectType::CT_Error:
 			cout << "WorldManager::Init - Error" << endl << static_cast<ErrorObject*>(worldObj)->GetError() << endl;
 			noError = false;
 			break;
-		case WorldObject::WorldType::CT_Unknown:
+		case Object::ObjectType::CT_Unknown:
 			cout << "WorldManager::Init - Unknown Type Encountered" << endl;
 			noError = false;
 			break;

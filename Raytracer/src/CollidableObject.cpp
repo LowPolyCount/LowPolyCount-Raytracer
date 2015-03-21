@@ -4,8 +4,8 @@
 
 using namespace std;
 
-CollidableObject::CollidableObject(WorldType inType) 
-:WorldObject(inType)
+CollidableObject::CollidableObject(ObjectType inType) 
+:Object(inType)
 {
 }
 
