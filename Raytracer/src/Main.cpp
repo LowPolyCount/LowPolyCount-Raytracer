@@ -6,7 +6,7 @@
 #include <iostream>
 #include <memory>
 #include "WorldManager.h"
-#include "YamlFile.h"
+#include "YamlFileLoader.h"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 
 	//auto tt = make_unique<YamlFile>();
 	//std::unique_ptr<IFileLoader> loadertt = tt;
-	std::unique_ptr<IFileLoader> loader(new YamlFile());
+	std::unique_ptr<IFileLoader> loader(new YamlFileLoader());
 	char t = ' ';
 
 	world.InitSystems(loader);

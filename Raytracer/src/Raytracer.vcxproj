@@ -110,7 +110,7 @@
     <ClInclude Include="Plane.h" />
     <ClInclude Include="WorldManager.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="YamlFile.h" />
+    <ClInclude Include="YamlFileLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
@@ -134,7 +134,7 @@
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="WorldManager.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="YamlFile.cpp" />
+    <ClCompile Include="YamlFileLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Object.yaml" />

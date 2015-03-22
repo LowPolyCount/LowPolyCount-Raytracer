@@ -3,11 +3,11 @@
 #include "yaml-cpp\yaml.h"
 #include "Object.h"
 
-class YamlFile: public IFileLoader
+class YamlFileLoader: public IFileLoader
 {
 public:
-	YamlFile();
-	virtual ~YamlFile();
+	YamlFileLoader();
+	virtual ~YamlFileLoader();
 	virtual bool LoadFile(const std::string& fileName);
 	virtual bool GetDataFromFile();
 	virtual const std::vector<DeserializeData>& GetData() const { return m_data; }

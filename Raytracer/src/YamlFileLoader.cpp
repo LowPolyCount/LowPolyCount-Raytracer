@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <algorithm>
-#include "YamlFile.h"
+#include "YamlFileLoader.h"
 #include "Vector3d.h"
 
 using namespace std;
@@ -57,16 +57,16 @@ namespace YAML
 }
 
 
-YamlFile::YamlFile()
+YamlFileLoader::YamlFileLoader()
 {
 }
 
 
-YamlFile::~YamlFile()
+YamlFileLoader::~YamlFileLoader()
 {
 }
 
-bool YamlFile::LoadFile(const string& fileName)
+bool YamlFileLoader::LoadFile(const string& fileName)
 {
 	m_yamlData = YAML::LoadFile(fileName.c_str());
 
@@ -74,7 +74,7 @@ bool YamlFile::LoadFile(const string& fileName)
 	return true;
 }
 
-bool YamlFile::GetDataFromFile()
+bool YamlFileLoader::GetDataFromFile()
 {
 	if (!m_yamlData.IsSequence())
 	{
@@ -94,7 +94,7 @@ bool YamlFile::GetDataFromFile()
 	return true;
 }
 
-DeserializeData YamlFile::DeseralizeYamlObject(const YAML::Node data) const
+DeserializeData YamlFileLoader::DeseralizeYamlObject(const YAML::Node data) const
 {
 	DeserializeData returnData;
 
@@ -128,7 +128,7 @@ DeserializeData YamlFile::DeseralizeYamlObject(const YAML::Node data) const
 	return returnData;
 }
 
-Object::ObjectType YamlFile::FindType(const std::string& stringType) const
+Object::ObjectType YamlFileLoader::FindType(const std::string& stringType) const
 {
 	if (stringType.compare(SPHERE) == 0)
 	{
@@ -154,19 +154,19 @@ Object::ObjectType YamlFile::FindType(const std::string& stringType) const
 	return Object::ObjectType::CT_Unknown;
 }
 
-void YamlFile::TokenizeSphere(const YAML::Node data, DeserializeData& returnData) const
+void YamlFileLoader::TokenizeSphere(const YAML::Node data, DeserializeData& returnData) const
 {
 	returnData.m_mapVector[DeserializeData::POSITION] = data[POSITION].as<Vector3d>();
 	returnData.m_mapVector[DeserializeData::MATERIAL] = data[MATERIAL].as<Vector3d>();
 	returnData.m_mapDouble[DeserializeData::RADIUS] = data[RADIUS].as<double>();
 }
 
-void YamlFile::TokenizePoint(const YAML::Node data, DeserializeData& returnData) const
+void YamlFileLoader::TokenizePoint(const YAML::Node data, DeserializeData& returnData) const
 {
 	returnData.m_mapVector[DeserializeData::POSITION] = data[POSITION].as<Vector3d>();
 }
 
-void YamlFile::TokenizeCamera(const YAML::Node data, DeserializeData& returnData) const
+void YamlFileLoader::TokenizeCamera(const YAML::Node data, DeserializeData& returnData) const
 {
 	returnData.m_mapVector[DeserializeData::POSITION] = data[POSITION].as<Vector3d>();
 	returnData.m_mapVector[DeserializeData::DIRECTION] = data[DIRECTION].as<Vector3d>();
@@ -175,12 +175,12 @@ void YamlFile::TokenizeCamera(const YAML::Node data, DeserializeData& returnData
 	returnData.m_mapVector[DeserializeData::PLANE2] = data["plane2"].as<Vector3d>();
 }
 
-void YamlFile::TokenizeImage(const YAML::Node data, DeserializeData& returnData) const
+void YamlFileLoader::TokenizeImage(const YAML::Node data, DeserializeData& returnData) const
 {
 	returnData.m_mapVector[DeserializeData::POSITION] = data[RESOLUTION].as<Vector3d>();
 }
 
-void YamlFile::TokenizeInfinitePlane(const YAML::Node data, DeserializeData& returnData) const
+void YamlFileLoader::TokenizeInfinitePlane(const YAML::Node data, DeserializeData& returnData) const
 {
 	returnData.m_mapVector[DeserializeData::MATERIAL] = data[MATERIAL].as<Vector3d>();
 	returnData.m_mapVector[DeserializeData::POSITION] = data[POSITION].as<Vector3d>();
@@ -188,9 +188,9 @@ void YamlFile::TokenizeInfinitePlane(const YAML::Node data, DeserializeData& ret
 
 }
 
-TEST(dataLoad, YamlFile)
+TEST(dataLoad, YamlFileLoader)
 {
-	YamlFile test;
+	YamlFileLoader test;
 	ASSERT_TRUE(test.LoadFile("unittest.yaml"));
 	ASSERT_TRUE(test.GetDataFromFile());
 	const std::vector<DeserializeData>& result = test.GetData();

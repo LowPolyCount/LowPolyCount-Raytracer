@@ -2,7 +2,7 @@
 #include "TestWorldManager.h"
 #include <gtest\gtest.h>
 #include "RendererSDL.h"
-#include "YamlFile.h"
+#include "YamlFileLoader.h"
 #include "Ray.h"
 
 using namespace std;
@@ -20,7 +20,7 @@ TestWorldManager::~TestWorldManager()
 TEST(init, WorldManager)
 {
 	TestWorldManager test;
-	std::unique_ptr<IFileLoader> loader(new YamlFile);
+	std::unique_ptr<IFileLoader> loader(new YamlFileLoader);
 
 	test.InitSystems(loader);
 	EXPECT_TRUE(test.Init("unittest.yaml"));
@@ -47,7 +47,7 @@ TEST(init, WorldManager)
 TEST(Render, WorldManager)
 {
 	TestWorldManager test;
-	std::unique_ptr<IFileLoader> file(new YamlFile());
+	std::unique_ptr<IFileLoader> file(new YamlFileLoader());
 	test.InitSystems(file);
 	EXPECT_TRUE(test.Init("unittest.yaml"));
 
