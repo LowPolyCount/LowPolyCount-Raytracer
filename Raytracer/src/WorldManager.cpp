@@ -6,8 +6,8 @@
 #include <gtest\gtest.h>
 #include "WorldManager.h"
 #include "LpcMath.h"
+#include "IFileLoader.h"
 #include "Ray.h"
-#include "Deserializer.h"
 #include "Factory.h"
 #include "DeserializeData.h"
 #include "RendererSDL.h"
