@@ -2,6 +2,7 @@
 #include "Vector3d.h"
 #include "CollidableObject.h"
 
+// TOOD: Rename to something more appropriate
 struct DeserializeData;
 class Plane : public CollidableObject
 {
@@ -17,7 +18,6 @@ public:
 	double GetWidth() const;
 	double GetHeight() const;
 
-	Vector3d GetDirection() const;
 private:
 	Vector3d	m_upperLeft;
 	Vector3d	m_lowerRight;

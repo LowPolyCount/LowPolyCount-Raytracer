@@ -10,6 +10,7 @@ static const string POINT = "point";
 static const string CAMERA = "camera";
 static const string IMAGE = "image";
 static const string INFINITE_PLANE = "infiniteplane";
+static const string TRIANGLE = "triangle";
 
 static const string VAR_X = "x";
 static const string VAR_Y = "y";
@@ -25,6 +26,10 @@ static const string RESOLUTION = "resolution";
 static const string MATERIAL = "material";
 static const string NEARPLANE = "nearPlane";
 static const string FARPLANE = "farPlane";
+static const string POINT1 = "point1";
+static const string POINT2 = "point2";
+static const string POINT3 = "point3";
+
 
 //@TODO: JMG - put checks around where we get data to prevent unauthorized access
 
@@ -99,10 +104,10 @@ DeserializeData YamlFileLoader::DeseralizeYamlObject(const YAML::Node data) cons
 	DeserializeData returnData;
 
 	std::string typeName = data[TYPE].as<std::string>();
-	//std::transform(typeName.begin(), typeName.end(), typeName.begin(), ::tolower);
 
 	returnData.m_type = FindType(typeName);
 
+	// @TODO: Find a way to reduce code required to tokenize. SHould combine this with FindType() function
 	switch (returnData.m_type)
 	{
 	case Object::ObjectType::CT_Sphere:
@@ -119,6 +124,9 @@ DeserializeData YamlFileLoader::DeseralizeYamlObject(const YAML::Node data) cons
 		break;
 	case Object::ObjectType::CT_InfinitePlane:
 		TokenizeInfinitePlane(data, returnData);
+		break;
+	case Object::ObjectType::CT_Triangle:
+		TokenizeTriangle(data, returnData);
 		break;
 	default:
 		returnData.m_type = Object::ObjectType::CT_Unknown;
@@ -141,6 +149,10 @@ Object::ObjectType YamlFileLoader::FindType(const std::string& stringType) const
 	else if (stringType.compare(POINT) == 0)
 	{
 		return Object::ObjectType::CT_Point;
+	}
+	else if (stringType.compare(TRIANGLE) == 0)
+	{
+		return Object::ObjectType::CT_Triangle;
 	}
 	else if (stringType.compare(CAMERA) == 0)
 	{
@@ -185,7 +197,14 @@ void YamlFileLoader::TokenizeInfinitePlane(const YAML::Node data, DeserializeDat
 	returnData.m_mapVector[DeserializeData::MATERIAL] = data[MATERIAL].as<Vector3d>();
 	returnData.m_mapVector[DeserializeData::POSITION] = data[POSITION].as<Vector3d>();
 	returnData.m_mapVector[DeserializeData::DIRECTION] = data[DIRECTION].as<Vector3d>();
+}
 
+void YamlFileLoader::TokenizeTriangle(const YAML::Node data, DeserializeData& returnData) const
+{
+	returnData.m_mapVector[DeserializeData::POINT1] = data[POINT1].as<Vector3d>();
+	returnData.m_mapVector[DeserializeData::POINT2] = data[POINT2].as<Vector3d>();
+	returnData.m_mapVector[DeserializeData::POINT3] = data[POINT3].as<Vector3d>();
+	returnData.m_mapVector[DeserializeData::MATERIAL] = data[MATERIAL].as<Vector3d>();
 }
 
 TEST(dataLoad, YamlFileLoader)

@@ -7,6 +7,7 @@
 #include "RendererSDL.h"
 #include "Camera.h"
 #include "Ray.h"
+#include "Triangle.h"
 #include "ErrorObject.h"
 
 using namespace std;
@@ -30,6 +31,7 @@ Factory::Factory()
 	AddType<Camera>(Object::ObjectType::CT_Camera);
 	AddType<RendererSDL>(Object::ObjectType::CT_Image);
 	AddType<InfinitePlane>(Object::ObjectType::CT_InfinitePlane);
+	AddType<Triangle>(Object::ObjectType::CT_Triangle);
 	AddType<ErrorObject>(Object::ObjectType::CT_Unknown);
 }
 

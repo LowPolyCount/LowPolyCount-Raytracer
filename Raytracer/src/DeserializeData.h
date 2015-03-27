@@ -17,7 +17,10 @@ struct DeserializeData
 		FRONTVIEWFRUSTRUM,
 		BACKVIEWFRUSTRUM,
 		PLANE1,				// TODO: find better way to represent complex types
-		PLANE2
+		PLANE2,
+		POINT1,				// TODO: See if we can build these three points as an array automatically
+		POINT2,
+		POINT3
 	};
 
 	Object::ObjectType				m_type;
