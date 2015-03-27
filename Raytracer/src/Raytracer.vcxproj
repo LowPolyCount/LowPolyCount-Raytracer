@@ -91,7 +91,6 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DeserializeData.h" />
-    <ClInclude Include="Deserializer.h" />
     <ClInclude Include="ErrorObject.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="CollidableObject.h" />
@@ -106,23 +105,23 @@
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TestDeserializer.h" />
     <ClInclude Include="TestWorldManager.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vector3d.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="WorldManager.h" />
-    <ClInclude Include="WorldObject.h" />
-    <ClInclude Include="YamlFile.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="YamlFileLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Deserializer.cpp" />
     <ClCompile Include="ErrorObject.cpp" />
     <ClCompile Include="Factory.cpp" />
     <ClCompile Include="CollidableObject.cpp" />
     <ClCompile Include="IFileLoader.cpp" />
     <ClCompile Include="InfinitePlane.cpp" />
     <ClCompile Include="LpcMath.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="RendererSDL.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Ray.cpp" />
@@ -132,13 +131,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TestDeserializer.cpp" />
     <ClCompile Include="TestWorldManager.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Vector3d.cpp" />
-    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="WorldManager.cpp" />
-    <ClCompile Include="WorldObject.cpp" />
-    <ClCompile Include="YamlFile.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="YamlFileLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Object.yaml" />

@@ -1,12 +1,12 @@
 #pragma once
-#include "WorldObject.h"
+#include "Object.h"
 #include "RaytracerTypes.h"
 
 struct DeserializeData;
-class IRenderer: public WorldObject
+class IRenderer: public Object
 {
 public:
-	IRenderer(WorldType inType) :WorldObject(inType) {}
+	IRenderer(ObjectType inType) :Object(inType) {}
 	~IRenderer(){}
 
 	virtual bool IsInit() const = 0;

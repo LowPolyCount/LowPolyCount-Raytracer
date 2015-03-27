@@ -10,7 +10,7 @@ static const RGBA BACKGROUND_COLOR = 255+(255<<8)+(255<<16);
 static const char* WINDOW_NAME = "LowPolyCount Raytracer";
 
 RendererSDL::RendererSDL()
-:IRenderer(WorldType::CT_Image)
+:IRenderer(ObjectType::CT_Image)
 , m_width(0)
 , m_height(0)
 , m_frameBuffer(nullptr)
@@ -18,7 +18,7 @@ RendererSDL::RendererSDL()
 {}
 
 RendererSDL::RendererSDL(int inWidth, int inHeight)
-: IRenderer(WorldType::CT_Image)
+: IRenderer(ObjectType::CT_Image)
 , m_width(inWidth)
 , m_height(inHeight)
 , m_frameBuffer(nullptr)

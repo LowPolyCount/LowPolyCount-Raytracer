@@ -14,7 +14,7 @@ static const int PLANE_DEPTH = 0;
 
 
 Camera::Camera()
-:WorldObject(WorldType::CT_Camera)
+:Object(ObjectType::CT_Camera)
 {}
 
 Camera::~Camera()

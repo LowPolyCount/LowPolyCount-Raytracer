@@ -6,12 +6,12 @@
 
 
 Point::Point()
-: CollidableObject(WorldType::CT_Point)
+: CollidableObject(ObjectType::CT_Point)
 , m_position()
 {}
 
 Point::Point(const Vector3d& pos)
-: CollidableObject(WorldType::CT_Point)
+: CollidableObject(ObjectType::CT_Point)
 , m_position()
 {
 	Init(pos);

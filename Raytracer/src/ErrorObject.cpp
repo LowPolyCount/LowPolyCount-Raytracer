@@ -2,7 +2,7 @@
 #include "ErrorObject.h"
 
 ErrorObject::ErrorObject()
-:WorldObject(WorldObject::WorldType::CT_Error)
+:Object(Object::ObjectType::CT_Error)
 ,m_errorMessage("Unknown Type Found")
 {
 
@@ -10,7 +10,7 @@ ErrorObject::ErrorObject()
 
 ErrorObject::ErrorObject(const std::string& error)
 :m_errorMessage(error)
-,WorldObject(WorldObject::WorldType::CT_Error)
+,Object(Object::ObjectType::CT_Error)
 {
 }
 

@@ -2,11 +2,12 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <limits>
 #include <gtest\gtest.h>
 #include "WorldManager.h"
 #include "LpcMath.h"
+#include "IFileLoader.h"
 #include "Ray.h"
-#include "Deserializer.h"
 #include "Factory.h"
 #include "DeserializeData.h"
 #include "RendererSDL.h"
@@ -58,21 +59,21 @@ bool WorldManager::Init(const std::string& fileName)
 	for (auto iter = worldData.begin(); iter != worldData.end(); ++iter)
 	{
 		const DeserializeData objData = *iter;
-		WorldObject* worldObj = factoryMethod.Create(objData);
+		Object* worldObj = factoryMethod.Create(objData);
 		
 		switch (worldObj->GetType())
 		{
-		case WorldObject::WorldType::CT_Camera:
+		case Object::ObjectType::CT_Camera:
 			m_camera = static_cast<Camera*>(worldObj);
 			break;
-		case WorldObject::WorldType::CT_Image:
+		case Object::ObjectType::CT_Image:
 			m_image = static_cast<IRenderer*>(worldObj);
 			break;
-		case WorldObject::WorldType::CT_Error:
+		case Object::ObjectType::CT_Error:
 			cout << "WorldManager::Init - Error" << endl << static_cast<ErrorObject*>(worldObj)->GetError() << endl;
 			noError = false;
 			break;
-		case WorldObject::WorldType::CT_Unknown:
+		case Object::ObjectType::CT_Unknown:
 			cout << "WorldManager::Init - Unknown Type Encountered" << endl;
 			noError = false;
 			break;
@@ -118,10 +119,7 @@ void WorldManager::RunThroughSimulation()
 		for (int i = 0; i<width; i++)
 		{
 			RGBA hitColor = FindIfIntersect(m_currentScene[i][j]);
-			//if (FindIfIntersect(m_currentScene[i][j]))
-			//{
 			m_image->SetPixel(i, j, hitColor);
-			//}
 		}
 	}
 }
@@ -140,12 +138,28 @@ RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 	{
 		if (LpcMath::IsCollision(testRay, (**i), pointOfIntersect))
 		{
-			//HitInformaionStruct hitInfo;
-			//hitInfo.m_hitMaterial = (*i)->GetLastMaterialHit();
-			//hitInfo.m_distance = (*i)->IstestRay.GetPosition() 
-			return (*i)->GetLastMaterialHit();
-
+			HitInformaionStruct hitInfo;
+			hitInfo.m_hitMaterial = (*i)->GetLastMaterialHit();
+			hitInfo.m_distance = ((*i)->GetPosition() - testRay.GetPosition()).length();
+			hitsDetected.push_back(hitInfo);
 		}
+	}
+
+	if (hitsDetected.size() > 0)
+	{
+		HitInformaionStruct closestHit;
+		closestHit.m_hitMaterial = COLOR_WHITE;
+		closestHit.m_distance = std::numeric_limits<double>::max();
+
+		for (auto i = hitsDetected.begin(); i != hitsDetected.end(); ++i)
+		{
+			if ((*i).m_distance >= 0 && (*i).m_distance < closestHit.m_distance)
+			{
+				closestHit = *i;
+			}
+		}
+
+		return closestHit.m_hitMaterial;
 	}
 
 	return COLOR_WHITE;

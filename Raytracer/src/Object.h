@@ -1,10 +1,10 @@
 #pragma once
 
 struct DeserializeData;
-class WorldObject
+class Object
 {
 public:
-	enum WorldType
+	enum ObjectType
 	{
 		// types that can collide with each other
 		CT_Sphere = 0,
@@ -12,6 +12,7 @@ public:
 		CT_Ray,
 		CT_Plane,
 		CT_InfinitePlane,
+		CT_Triangle,
 
 		// other types of objects
 		CT_Image,
@@ -20,11 +21,11 @@ public:
 		CT_Unknown
 	};
 
-	explicit WorldObject(WorldType inType);
-	virtual ~WorldObject();
+	explicit Object(ObjectType inType);
+	virtual ~Object();
 	virtual void Init(const DeserializeData& data) = 0;
-	inline WorldType GetType() const { return m_type; }
+	inline ObjectType GetType() const { return m_type; }
 private:
-	WorldType m_type;
+	ObjectType m_type;
 };
 

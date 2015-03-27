@@ -7,6 +7,7 @@
 #include "RendererSDL.h"
 #include "Camera.h"
 #include "Ray.h"
+#include "Triangle.h"
 #include "ErrorObject.h"
 
 using namespace std;
@@ -14,23 +15,24 @@ using namespace std;
 static const std::string ERROR("Factory Object Not Found");
 
 template<class Type>
-static WorldObject* CreateType(const DeserializeData& data)
+static Object* CreateType(const DeserializeData& data)
 {
-	WorldObject* returnValue = new Type();
+	Object* returnValue = new Type();
 	returnValue->Init(data);
 	return returnValue;
 }
 
 Factory::Factory()
 {
-	AddType<Sphere>(WorldObject::WorldType::CT_Sphere);
-	AddType<Point>(WorldObject::WorldType::CT_Point);
-	AddType<Ray>(WorldObject::WorldType::CT_Ray);
-	AddType<Plane>(WorldObject::WorldType::CT_Plane);
-	AddType<Camera>(WorldObject::WorldType::CT_Camera);
-	AddType<RendererSDL>(WorldObject::WorldType::CT_Image);
-	AddType<InfinitePlane>(WorldObject::WorldType::CT_InfinitePlane);
-	AddType<ErrorObject>(WorldObject::WorldType::CT_Unknown);
+	AddType<Sphere>(Object::ObjectType::CT_Sphere);
+	AddType<Point>(Object::ObjectType::CT_Point);
+	AddType<Ray>(Object::ObjectType::CT_Ray);
+	AddType<Plane>(Object::ObjectType::CT_Plane);
+	AddType<Camera>(Object::ObjectType::CT_Camera);
+	AddType<RendererSDL>(Object::ObjectType::CT_Image);
+	AddType<InfinitePlane>(Object::ObjectType::CT_InfinitePlane);
+	AddType<Triangle>(Object::ObjectType::CT_Triangle);
+	AddType<ErrorObject>(Object::ObjectType::CT_Unknown);
 }
 
 
@@ -39,16 +41,16 @@ Factory::~Factory()
 }
 
 template<class Type>
-void Factory::AddType(WorldObject::WorldType worldType)
+void Factory::AddType(Object::ObjectType worldType)
 {
 	ComponentFactoryFuncPtr function = &CreateType<Type>;
 	m_templateMap.insert(std::make_pair(worldType, function));
 }
 
 //TODO: Return a smartpointer
-WorldObject* Factory::Create(const DeserializeData& data)
+Object* Factory::Create(const DeserializeData& data)
 {
-	WorldObject* returnValue = nullptr;
+	Object* returnValue = nullptr;
 	ComponentFactoryFuncPtr find = m_templateMap.at(data.m_type);
 
 	if (find)

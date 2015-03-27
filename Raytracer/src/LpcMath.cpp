@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include <iostream>
 #include "LpcMath.h"
-/*#include "Vector3d.h"
-#include "CollidableObject.h"*/
+#include "Ray.h"
+#include "Sphere.h"
+#include "Point.h"
+#include "InfinitePlane.h"
+#include "Triangle.h"
 
 
 using namespace std;
@@ -18,7 +21,8 @@ LpcMath::~LpcMath()
 
 bool LpcMath::IsCollision(const CollidableObject& obj1, const CollidableObject& obj2, Vector3d& pointOfIntersect)
 {
-	if (obj2.GetType() == CollidableObject::CT_Ray && obj2.GetType() != CollidableObject::CT_Ray)
+	// always make sure ray is always obj1 
+	if (obj1.GetType() != CollidableObject::CT_Ray && obj2.GetType() == CollidableObject::CT_Ray)
 	{
 		return IsCollision(obj2, obj1, pointOfIntersect);
 	}
@@ -33,6 +37,8 @@ bool LpcMath::IsCollision(const CollidableObject& obj1, const CollidableObject& 
 		return IsCollisionRay(static_cast<const Ray&>(obj1), static_cast<const Ray&>(obj2), pointOfIntersect);
 	case CollidableObject::CT_InfinitePlane:
 		return IsCollisionInfinitePlane(static_cast<const Ray&>(obj1), static_cast<const InfinitePlane&>(obj2), pointOfIntersect);
+	case CollidableObject::CT_Triangle:
+		return IsCollisionTriangle(static_cast<const Ray&>(obj1), static_cast<const Triangle&>(obj2), pointOfIntersect);
 	default:
 		cout << "DEFAULT IsCollision" << endl;
 		break;
@@ -89,8 +95,7 @@ bool LpcMath::IsCollisionSphere(const Ray& obj1, const Sphere& rhs, Vector3d& po
 
 bool LpcMath::IsCollisionRay(const Ray& obj1, const Ray& obj2, Vector3d& pointOfIntersect)
 {
-	cout << "IsCollisionRay not implemented!" << endl;
-	assert(false);
+	cout << "ERROR: IsCollisionRay not implemented!" << endl;
 	return true;
 }
 
@@ -109,6 +114,22 @@ bool LpcMath::IsCollisionInfinitePlane(const Ray& obj1, const InfinitePlane& obj
 	return false;
 }
 
+bool LpcMath::IsCollisionTriangle(const Ray& obj1, const Triangle& rhs, Vector3d& pointOfIntersect)
+{
+	const InfinitePlane& plane = rhs.GetPlane();
+	const Vector3d& normalVec = plane.GetDirection();
+
+	if (IsCollisionInfinitePlane(obj1, plane, pointOfIntersect))
+	{
+		// in plane, now check if intersect point is in triangle
+		bool hit1 = (rhs.GetPoint2() - rhs.GetPoint1()).CrossProduct(pointOfIntersect - rhs.GetPoint1()).DotProduct(normalVec) >= 0;
+		bool hit2 = (rhs.GetPoint3() - rhs.GetPoint2()).CrossProduct(pointOfIntersect - rhs.GetPoint2()).DotProduct(normalVec) >= 0;
+		bool hit3 = (rhs.GetPoint1() - rhs.GetPoint3()).CrossProduct(pointOfIntersect - rhs.GetPoint3()).DotProduct(normalVec) >= 0;
+		return hit1 && hit2 && hit3;
+	}
+
+	return false;
+}
 
 TEST(PointCollision, Ray)
 {
@@ -197,6 +218,30 @@ TEST(InfinitePlaneCollision, Ray)
 	EXPECT_EQ(Vector3d(0, 0, 0), test3Intersect);
 	EXPECT_EQ(Vector3d(-5, 0, -5), test4Intersect);
 	EXPECT_EQ(Vector3d(0, 0, 0), test5Intersect);
+}
+
+TEST(TriangleCollision, Ray)
+{
+	Ray ray(Vector3d(0, 0, -10), Vector3d(0, 0, 1));
+
+	Triangle test1;		// no collision
+	Triangle test2;		// collision
+
+	test1.Init(Vector3d(5, 5, 5),
+		Vector3d(3, 3, 5),
+		Vector3d(3, 8, 5));
+
+	test2.Init(Vector3d(0, 0, 0),
+		Vector3d(-5, -5, 0),
+		Vector3d(5, 0, 0));
+
+	Vector3d testIntersection;
+
+
+	EXPECT_FALSE(LpcMath::IsCollision(test1, ray, Vector3d()));
+	EXPECT_TRUE(LpcMath::IsCollision(test2, ray, testIntersection));
+
+	EXPECT_EQ(Vector3d(0, 0, 0), testIntersection);
 }
 
 TEST(RayCollision, Ray)

@@ -9,9 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\CollisionThings">
-      <UniqueIdentifier>{e378f929-bb5c-4482-aef6-2cdfdf8d7d88}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{0a8485b7-3ba9-4b0b-9bee-503fb1ac78a2}</UniqueIdentifier>
     </Filter>
@@ -23,6 +20,9 @@
     </Filter>
     <Filter Include="Source Files\unittests">
       <UniqueIdentifier>{e8c4fc63-2a51-4138-af0a-d3642d50c082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CollidableObjects">
+      <UniqueIdentifier>{e378f929-bb5c-4482-aef6-2cdfdf8d7d88}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -61,12 +61,6 @@
     <ClInclude Include="WorldManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Deserializer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TestDeserializer.h">
-      <Filter>Source Files\unittests</Filter>
-    </ClInclude>
     <ClInclude Include="Factory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -76,22 +70,13 @@
     <ClInclude Include="TestWorldManager.h">
       <Filter>Source Files\unittests</Filter>
     </ClInclude>
-    <ClInclude Include="Plane.h">
-      <Filter>Source Files\CollisionThings</Filter>
-    </ClInclude>
     <ClInclude Include="CollidableObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RendererSDL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IFileLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="YamlFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ErrorObject.h">
@@ -109,6 +94,18 @@
     <ClInclude Include="LpcMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="YamlFileLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -118,25 +115,19 @@
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="Point.cpp">
-      <Filter>Source Files\CollisionThings</Filter>
+      <Filter>Source Files\CollidableObjects</Filter>
     </ClCompile>
     <ClCompile Include="Sphere.cpp">
-      <Filter>Source Files\CollisionThings</Filter>
+      <Filter>Source Files\CollidableObjects</Filter>
     </ClCompile>
     <ClCompile Include="Ray.cpp">
-      <Filter>Source Files\CollisionThings</Filter>
+      <Filter>Source Files\CollidableObjects</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WorldManager.cpp">
       <Filter>Source Files\World</Filter>
-    </ClCompile>
-    <ClCompile Include="Deserializer.cpp">
-      <Filter>Source Files\World</Filter>
-    </ClCompile>
-    <ClCompile Include="TestDeserializer.cpp">
-      <Filter>Source Files\unittests</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\World</Filter>
@@ -147,32 +138,35 @@
     <ClCompile Include="TestWorldManager.cpp">
       <Filter>Source Files\unittests</Filter>
     </ClCompile>
-    <ClCompile Include="Plane.cpp">
-      <Filter>Source Files\CollisionThings</Filter>
-    </ClCompile>
     <ClCompile Include="CollidableObject.cpp">
-      <Filter>Source Files\CollisionThings</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldObject.cpp">
-      <Filter>Source Files\Core</Filter>
+      <Filter>Source Files\CollidableObjects</Filter>
     </ClCompile>
     <ClCompile Include="RendererSDL.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
-    <ClCompile Include="IFileLoader.cpp">
-      <Filter>Source Files\World</Filter>
-    </ClCompile>
-    <ClCompile Include="YamlFile.cpp">
-      <Filter>Source Files\World</Filter>
-    </ClCompile>
     <ClCompile Include="ErrorObject.cpp">
-      <Filter>Source Files\CollisionThings</Filter>
+      <Filter>Source Files\CollidableObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="YamlFileLoader.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="IFileLoader.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="InfinitePlane.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CollidableObjects</Filter>
     </ClCompile>
     <ClCompile Include="LpcMath.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source Files\CollidableObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

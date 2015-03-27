@@ -9,7 +9,7 @@
 using namespace std;
 
 Sphere::Sphere()
-: CollidableObject(WorldType::CT_Sphere)
+: CollidableObject(ObjectType::CT_Sphere)
 , m_position()
 , m_radius(0)
 , m_radiusSqr(0)
@@ -17,7 +17,7 @@ Sphere::Sphere()
 }
 
 Sphere::Sphere(const Vector3d& inPos, double inRadius)
-: CollidableObject(WorldType::CT_Sphere)
+: CollidableObject(ObjectType::CT_Sphere)
 , m_position()
 , m_radius(0)
 , m_radiusSqr(0)

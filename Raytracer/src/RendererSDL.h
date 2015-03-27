@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "Vector3d.h"
-#include "WorldObject.h"
+#include "Object.h"
 #include "IRenderer.h"
 #include "RaytracerTypes.h"
 

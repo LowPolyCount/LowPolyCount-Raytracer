@@ -1,13 +1,13 @@
 #pragma once
 #include "IFileLoader.h"
 #include "yaml-cpp\yaml.h"
-#include "WorldObject.h"
+#include "Object.h"
 
-class YamlFile: public IFileLoader
+class YamlFileLoader: public IFileLoader
 {
 public:
-	YamlFile();
-	virtual ~YamlFile();
+	YamlFileLoader();
+	virtual ~YamlFileLoader();
 	virtual bool LoadFile(const std::string& fileName);
 	virtual bool GetDataFromFile();
 	virtual const std::vector<DeserializeData>& GetData() const { return m_data; }
@@ -18,7 +18,8 @@ private:
 	void TokenizeCamera(const YAML::Node data, DeserializeData& returnData) const;
 	void TokenizeImage(const YAML::Node data, DeserializeData& returnData) const;
 	void TokenizeInfinitePlane(const YAML::Node data, DeserializeData& returnData) const;
-	WorldObject::WorldType FindType(const std::string& stringType) const;
+	void TokenizeTriangle(const YAML::Node data, DeserializeData& returnData) const;
+	Object::ObjectType FindType(const std::string& stringType) const;
 
 	YAML::Node						m_yamlData;
 	std::vector<DeserializeData>	m_data;

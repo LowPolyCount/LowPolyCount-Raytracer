@@ -1,10 +1,10 @@
 #pragma once
 #include "Vector3d.h"
-#include "WorldObject.h"
+#include "Object.h"
 #include "Plane.h"
 #include "Ray.h"
 
-class Camera: public WorldObject
+class Camera: public Object
 {
 public:
 	Camera();
