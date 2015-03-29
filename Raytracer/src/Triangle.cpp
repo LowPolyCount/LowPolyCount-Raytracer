@@ -5,7 +5,7 @@
 
 Triangle::Triangle()
 :CollidableObject(CT_Triangle)
-,m_materialProperty()
+, m_material()
 ,m_point1()
 ,m_point2()
 ,m_point3()
@@ -38,12 +38,5 @@ void Triangle::Init(const DeserializeData& data)
 			data.m_mapVector.at(DeserializeData::POINT2),
 			data.m_mapVector.at(DeserializeData::POINT3));
 
-	const Vector3d material = data.m_mapVector.at(DeserializeData::MATERIAL);
-
-	m_materialProperty = static_cast<int>(material.x) + (static_cast<int>(material.y) << 8) + (static_cast<int>(material.z) << 16);
-}
-
-RGBA Triangle::GetLastMaterialHit() const
-{
-	return m_materialProperty;
+	m_material.Init(data);
 }

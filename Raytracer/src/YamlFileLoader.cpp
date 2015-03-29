@@ -12,6 +12,9 @@ static const string IMAGE = "image";
 static const string INFINITE_PLANE = "infiniteplane";
 static const string TRIANGLE = "triangle";
 
+static const string MATERIAL = "material";
+static const string LIGHTING = "lighting";
+
 static const string VAR_X = "x";
 static const string VAR_Y = "y";
 static const string VAR_Z = "z";
@@ -23,7 +26,6 @@ static const string TYPE = "type";
 static const string POSITION = "position";
 static const string DIRECTION = "direction";
 static const string RESOLUTION = "resolution";
-static const string MATERIAL = "material";
 static const string NEARPLANE = "nearPlane";
 static const string FARPLANE = "farPlane";
 static const string POINT1 = "point1";

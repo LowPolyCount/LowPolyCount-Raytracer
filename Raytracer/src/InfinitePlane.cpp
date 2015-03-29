@@ -27,16 +27,8 @@ void InfinitePlane::Init(const DeserializeData& data)
 {
 	Init(data.m_mapVector.at(DeserializeData::POSITION), data.m_mapVector.at(DeserializeData::DIRECTION));
 
-	// TODO: Move conversion to a utility function.
-	Vector3d material = data.m_mapVector.at(DeserializeData::MATERIAL);
-	m_lastMaterialHit = static_cast<int>(material.x) + (static_cast<int>(material.y) << 8) + (static_cast<int>(material.z) << 16);
+	m_material.Init(data);
 }
-
-RGBA InfinitePlane::GetLastMaterialHit() const
-{
-	return m_lastMaterialHit;
-}
-
 
 void InfinitePlane::Init(const Vector3d& pos, const Vector3d& dir)
 {

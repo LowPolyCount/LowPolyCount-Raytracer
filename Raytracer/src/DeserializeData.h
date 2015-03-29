@@ -14,6 +14,7 @@ struct DeserializeData
 		DIRECTION,
 		RADIUS,
 		MATERIAL,
+		LIGHTING,
 		FRONTVIEWFRUSTRUM,
 		BACKVIEWFRUSTRUM,
 		PLANE1,				// TODO: find better way to represent complex types

@@ -5,6 +5,10 @@
 
 class Sphere;
 struct DeserializeData;
+
+/*
+Defines a point that exists in space. Used just for theoretical purposes and unit tests.
+*/
 class Point : public CollidableObject
 {
 public:

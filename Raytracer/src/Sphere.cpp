@@ -38,11 +38,6 @@ void Sphere::Init(const Vector3d& inPos, double inRadius)
 void Sphere::Init(const DeserializeData& data)
 {
 	Init(data.m_mapVector.at(DeserializeData::POSITION), data.m_mapDouble.at(DeserializeData::RADIUS));
-	Vector3d material = data.m_mapVector.at(DeserializeData::MATERIAL);
-	m_lastMaterialHit = static_cast<int>(material.x) + (static_cast<int>(material.y) << 8) + (static_cast<int>(material.z) << 16);
-}
 
-RGBA Sphere::GetLastMaterialHit() const
-{
-	return m_lastMaterialHit;
+	m_material.Init(data);
 }

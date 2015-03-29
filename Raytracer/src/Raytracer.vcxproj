@@ -98,6 +98,7 @@
     <ClInclude Include="InfinitePlane.h" />
     <ClInclude Include="IRenderer.h" />
     <ClInclude Include="LpcMath.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="RaytracerTypes.h" />
     <ClInclude Include="RendererSDL.h" />
     <ClInclude Include="Point.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="IFileLoader.cpp" />
     <ClCompile Include="InfinitePlane.cpp" />
     <ClCompile Include="LpcMath.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="RendererSDL.cpp" />
     <ClCompile Include="Point.cpp" />
