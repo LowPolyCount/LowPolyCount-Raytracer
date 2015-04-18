@@ -11,6 +11,7 @@ static const string CAMERA = "camera";
 static const string IMAGE = "image";
 static const string INFINITE_PLANE = "infiniteplane";
 static const string TRIANGLE = "triangle";
+static const string LIGHT = "light";
 
 static const string MATERIAL = "material";
 static const string LIGHTING = "lighting";
@@ -105,67 +106,49 @@ DeserializeData YamlFileLoader::DeseralizeYamlObject(const YAML::Node data) cons
 {
 	DeserializeData returnData;
 
-	std::string typeName = data[TYPE].as<std::string>();
+	const std::string typeName = data[TYPE].as<std::string>();
 
-	returnData.m_type = FindType(typeName);
-
-	// @TODO: Find a way to reduce code required to tokenize. SHould combine this with FindType() function
-	switch (returnData.m_type)
+	if (typeName.compare(SPHERE) == 0)
 	{
-	case Object::ObjectType::CT_Sphere:
+		returnData.m_type = Object::ObjectType::CT_Sphere;
 		TokenizeSphere(data, returnData);
-		break;
-	case Object::ObjectType::CT_Point:
-		TokenizePoint(data, returnData);
-		break;
-	case Object::ObjectType::CT_Camera:
-		TokenizeCamera(data, returnData);
-		break;
-	case Object::ObjectType::CT_Image:
-		TokenizeImage(data, returnData);
-		break;
-	case Object::ObjectType::CT_InfinitePlane:
+	}
+	else if (typeName.compare(INFINITE_PLANE) == 0)
+	{
+		returnData.m_type = Object::ObjectType::CT_InfinitePlane;
 		TokenizeInfinitePlane(data, returnData);
-		break;
-	case Object::ObjectType::CT_Triangle:
+	}
+	else if (typeName.compare(POINT) == 0)
+	{
+		returnData.m_type = Object::ObjectType::CT_Point;
+		TokenizePoint(data, returnData);
+	}
+	else if (typeName.compare(TRIANGLE) == 0)
+	{
+		returnData.m_type = Object::ObjectType::CT_Triangle;
 		TokenizeTriangle(data, returnData);
-		break;
-	default:
+	}
+	else if (typeName.compare(LIGHT) == 0)
+	{
+		returnData.m_type = Object::ObjectType::CT_Light;
+		TokenizeLight(data, returnData);
+	}
+	else if (typeName.compare(CAMERA) == 0)
+	{
+		returnData.m_type = Object::ObjectType::CT_Camera;
+		TokenizeCamera(data, returnData);
+	}
+	else if (typeName.compare(IMAGE) == 0)
+	{
+		returnData.m_type = Object::ObjectType::CT_Image;
+		TokenizeImage(data, returnData);
+	}
+	else
+	{
 		returnData.m_type = Object::ObjectType::CT_Unknown;
-		break;
 	}
 
 	return returnData;
-}
-
-Object::ObjectType YamlFileLoader::FindType(const std::string& stringType) const
-{
-	if (stringType.compare(SPHERE) == 0)
-	{
-		return Object::ObjectType::CT_Sphere;
-	}
-	else if (stringType.compare(INFINITE_PLANE) == 0)
-	{
-		return Object::ObjectType::CT_InfinitePlane;
-	}
-	else if (stringType.compare(POINT) == 0)
-	{
-		return Object::ObjectType::CT_Point;
-	}
-	else if (stringType.compare(TRIANGLE) == 0)
-	{
-		return Object::ObjectType::CT_Triangle;
-	}
-	else if (stringType.compare(CAMERA) == 0)
-	{
-		return Object::ObjectType::CT_Camera;
-	}
-	else if (stringType.compare(IMAGE) == 0)
-	{
-		return Object::ObjectType::CT_Image;
-	}
-
-	return Object::ObjectType::CT_Unknown;
 }
 
 void YamlFileLoader::TokenizeSphere(const YAML::Node data, DeserializeData& returnData) const
@@ -209,6 +192,13 @@ void YamlFileLoader::TokenizeTriangle(const YAML::Node data, DeserializeData& re
 	returnData.m_mapVector[DeserializeData::MATERIAL] = data[MATERIAL].as<Vector3d>();
 }
 
+void YamlFileLoader::TokenizeLight(const YAML::Node data, DeserializeData& returnData) const
+{
+	returnData.m_mapVector[DeserializeData::POSITION] = data[POSITION].as<Vector3d>();
+	returnData.m_mapVector[DeserializeData::MATERIAL] = data[MATERIAL].as<Vector3d>();
+	returnData.m_mapVector[DeserializeData::LIGHTING] = data[MATERIAL].as<Vector3d>();
+}
+
 TEST(dataLoad, YamlFileLoader)
 {
 	YamlFileLoader test;
@@ -229,7 +219,7 @@ TEST(dataLoad, YamlFileLoader)
 	EXPECT_EQ(result[2].m_mapVector.at(DeserializeData::MapIds::DIRECTION), Vector3d(1, 1, 1));
 
 	EXPECT_EQ(result[3].m_type, Object::ObjectType::CT_Image);
-	EXPECT_EQ(result[3].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(256, 640, 0));
+	EXPECT_EQ(result[3].m_mapVector.at(DeserializeData::MapIds::POSITION), Vector3d(25, 64, 0));
 }
 
 /*TEST(FileLoadFail, YamlFile)

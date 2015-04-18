@@ -17,15 +17,13 @@ public:
 	~Sphere();
 	virtual void Init(const Vector3d& inPos, double inRadius);
 	virtual void Init(const DeserializeData& data);
-	virtual RGBA GetLastMaterialHit() const { return m_material.GetColor(); }
-
+	virtual const Vector3d& GetNormal(const Vector3d& intersectPoint) const;
 
 	inline const Vector3d& GetPosition() const { return m_position.GetPosition(); }
 	inline double GetRadius() const{ return m_radius; }
 	inline double GetRadiusSqr() const { return m_radiusSqr; }
 private:
 	Point		m_position;
-	Material	m_material;
 	double		m_radius;
 	double		m_radiusSqr;
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "RaytracerTypes.h"
 
 class Vector3d
 {
@@ -17,14 +18,16 @@ public:
 
 	bool operator==(const Vector3d& rhs) const;
 	bool operator!=(const Vector3d& rhs) const;
-	Vector3d operator+(const Vector3d& rhs) const;
+	Vector3d operator-() const;
 	Vector3d operator-(const Vector3d& rhs) const;
+	Vector3d operator+(const Vector3d& rhs) const;
 	Vector3d operator*(double scale) const;
 	Vector3d operator/(double scale) const;
 	void operator+=(const Vector3d& rhs);
 	void operator-=(const Vector3d& rhs);
 	void operator*=(double scale);
 	void operator/=(double scale);
+	RGBA ToRGBA() const;
 	std::string ToString() const;
 
 	double x, y, z;

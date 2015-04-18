@@ -29,3 +29,8 @@ void Point::Init(const DeserializeData& data)
 	Init(data.m_mapVector.at(DeserializeData::POSITION));
 }
 
+const Vector3d& Point::GetNormal(const Vector3d& intersectPoint) const
+{
+	return m_position;
+}
+

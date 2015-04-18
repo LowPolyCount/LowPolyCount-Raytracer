@@ -19,7 +19,7 @@ private:
 	void TokenizeImage(const YAML::Node data, DeserializeData& returnData) const;
 	void TokenizeInfinitePlane(const YAML::Node data, DeserializeData& returnData) const;
 	void TokenizeTriangle(const YAML::Node data, DeserializeData& returnData) const;
-	Object::ObjectType FindType(const std::string& stringType) const;
+	void TokenizeLight(const YAML::Node data, DeserializeData& returnData) const;
 
 	YAML::Node						m_yamlData;
 	std::vector<DeserializeData>	m_data;

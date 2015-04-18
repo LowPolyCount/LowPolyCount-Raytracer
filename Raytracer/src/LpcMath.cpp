@@ -6,6 +6,7 @@
 #include "Point.h"
 #include "InfinitePlane.h"
 #include "Triangle.h"
+#include "Light.h"
 
 
 using namespace std;
@@ -18,6 +19,49 @@ using namespace std;
 LpcMath::~LpcMath()
 {
 }*/
+
+double LpcMath::CalcualteAttenuation(const Light* inLight, const double distanceToLight)
+{
+	const double LIGHT_RADIUS = 5;
+	return 1 - (distanceToLight / LIGHT_RADIUS);
+}
+
+Vector3d LpcMath::DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoint, const Vector3d& normalVec, const std::vector<const Light*>& hitLights,
+	const Vector3d& color, double diffuseFactor, double specularFactor, double shininess)
+{
+	const double DIFFUSE = .8;
+	const double ATTENUATION = .8;
+
+	if (hitLights.size() >= 1)
+	{
+		return color;
+	}
+
+	return color;
+	return Vector3d(0, 0, 0);
+
+	Vector3d dirToEye = -(inRay.GetDirection());
+
+	double diffuse = 0;
+	for (auto i = hitLights.begin(); i != hitLights.end(); ++i)
+	{
+		const double toLightDistance = ((*i)->GetPosition() - intersectPoint).length();
+		const Vector3d dirToLight = ((*i)->GetPosition() - intersectPoint).Normalize();
+
+		const double attenuation = CalcualteAttenuation(*i, toLightDistance);
+
+		const double diffuseFactor = DIFFUSE * dirToLight.DotProduct(normalVec);
+
+		if (diffuseFactor > 0)
+		{
+			const double thisDiffuse = (color.ToRGBA() * diffuseFactor * (*i)->GetMaterial().GetColor().ToRGBA()) * attenuation;
+			diffuse += thisDiffuse;
+		}
+
+	}
+	return Vector3d(0, 0, 0);
+}
+
 
 bool LpcMath::IsCollision(const CollidableObject& obj1, const CollidableObject& obj2, Vector3d& pointOfIntersect)
 {

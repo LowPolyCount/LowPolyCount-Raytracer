@@ -18,7 +18,7 @@ public:
 
 	void Init(const DeserializeData& data);
 	void Init(const Vector3d& pos, const Vector3d& dir);
-	virtual RGBA GetLastMaterialHit() const { return m_material.GetColor(); }
+	virtual const Vector3d& GetNormal(const Vector3d& intersectPoint) const;
 
 	//@todo: Add Move operation
 	bool operator ==(const InfinitePlane& rhs) const;
@@ -32,5 +32,4 @@ public:
 private:
 	Point m_position;
 	Vector3d m_direction;
-	Material m_material;
 };

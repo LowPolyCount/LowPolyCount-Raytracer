@@ -30,10 +30,11 @@ TEST(init, WorldManager)
 //	EXPECT_EQ(test.GetCamera()->GetNearPlane(), Vector3d(0, 1, 2));
 //	EXPECT_EQ(test.GetCamera()->GetFarPlane(), Vector3d(2, 1, 0));
 	EXPECT_EQ(test.GetCamera()->GetPosition(), Vector3d(1, 1, 1));
-	EXPECT_EQ(test.GetImage()->GetWidth(), 256);
-	EXPECT_EQ(test.GetImage()->GetHeight(), 640);
+	EXPECT_EQ(test.GetImage()->GetWidth(), 25);
+	EXPECT_EQ(test.GetImage()->GetHeight(), 64);
 
-	EXPECT_EQ(test.TestGetObjects().size(), 2);
+	EXPECT_EQ(test.TestGetObjects().size(), 3);
+	EXPECT_EQ(test.TestGetLights().size(), 3);
 }
 
 // TODO: Enable one day
@@ -46,14 +47,34 @@ TEST(init, WorldManager)
 
 TEST(Render, WorldManager)
 {
-	TestWorldManager test;
+	TestWorldManager testWorld;
 	std::unique_ptr<IFileLoader> file(new YamlFileLoader());
-	test.InitSystems(file);
-	EXPECT_TRUE(test.Init("unittest.yaml"));
+	testWorld.InitSystems(file);
+	EXPECT_TRUE(testWorld.Init("unittest.yaml"));
 
-	test.Render(false);
-	const vector<vector<Ray>>& scene = test.GetCurrentScene();
+	testWorld.Render(false);
+	const vector<vector<Ray>>& scene = testWorld.GetCurrentScene();
 
-	EXPECT_EQ(scene.size(), test.GetImage()->GetWidth());
-	EXPECT_EQ(scene[0].size(), test.GetImage()->GetHeight());
+	EXPECT_EQ(scene.size(), testWorld.GetImage()->GetWidth());
+	EXPECT_EQ(scene[0].size(), testWorld.GetImage()->GetHeight());
+}
+
+TEST(LightHit, WorldManager)
+{
+	TestWorldManager testWorld;
+	std::unique_ptr<IFileLoader> file(new YamlFileLoader());
+	testWorld.InitSystems(file);
+	EXPECT_TRUE(testWorld.Init("unittest.yaml"));
+
+	const Vector3d rayStart(5, 5, 2.9);
+	Ray test1;
+	Ray test2;
+	Ray test3;
+	test1.Init(rayStart, (testWorld.TestGetLights()[0]->GetPosition() - rayStart).Normalize());
+	test2.Init(rayStart, (testWorld.TestGetLights()[1]->GetPosition() - rayStart).Normalize());
+	test3.Init(rayStart, (testWorld.TestGetLights()[2]->GetPosition() - rayStart).Normalize());
+
+	EXPECT_TRUE(testWorld.TestLightCollision(testWorld.TestGetLights()[0], test1));
+	EXPECT_FALSE(testWorld.TestLightCollision(testWorld.TestGetLights()[1], test2));
+	EXPECT_TRUE(testWorld.TestLightCollision(testWorld.TestGetLights()[2], test3));
 }

@@ -26,7 +26,8 @@ int main(int argc, char **argv)
 	char t = ' ';
 
 	world.InitSystems(loader);
-	world.Init("Object.yaml");
+	world.Init("LightSphere.yaml");
+	//world.Init("Object.yaml");
 	world.Render(true);
 	while (t != 'x')
 	{

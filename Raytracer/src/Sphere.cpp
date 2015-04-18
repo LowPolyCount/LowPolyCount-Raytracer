@@ -41,3 +41,8 @@ void Sphere::Init(const DeserializeData& data)
 
 	m_material.Init(data);
 }
+
+const Vector3d& Sphere::GetNormal(const Vector3d& intersectPoint) const
+{
+	return (intersectPoint - m_position.GetPosition()).Normalize();
+}

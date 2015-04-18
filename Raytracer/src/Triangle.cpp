@@ -5,7 +5,6 @@
 
 Triangle::Triangle()
 :CollidableObject(CT_Triangle)
-, m_material()
 ,m_point1()
 ,m_point2()
 ,m_point3()
@@ -39,4 +38,9 @@ void Triangle::Init(const DeserializeData& data)
 			data.m_mapVector.at(DeserializeData::POINT3));
 
 	m_material.Init(data);
+}
+
+const Vector3d& Triangle::GetNormal(const Vector3d& intersectPoint) const
+{
+	return m_plane.GetDirection();
 }

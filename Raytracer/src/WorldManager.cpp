@@ -21,7 +21,6 @@ WorldManager::WorldManager()
 :m_objects()
 , m_camera(nullptr)
 , m_image(nullptr)
-
 {
 }
 
@@ -68,6 +67,9 @@ bool WorldManager::Init(const std::string& fileName)
 			break;
 		case Object::ObjectType::CT_Image:
 			m_image = static_cast<IRenderer*>(worldObj);
+			break;
+		case Object::ObjectType::CT_Light:
+			m_lights.push_back(static_cast<Light*>(worldObj));
 			break;
 		case Object::ObjectType::CT_Error:
 			cout << "WorldManager::Init - Error" << endl << static_cast<ErrorObject*>(worldObj)->GetError() << endl;
@@ -124,22 +126,28 @@ void WorldManager::RunThroughSimulation()
 	}
 }
 
-struct HitInformaionStruct
+struct IntersectionRecord
 {
-	RGBA m_hitMaterial;
-	double m_distance;
+	const Ray*				m_rayHit;
+	const CollidableObject* m_objectHit;
+	Vector3d				m_pointOfIntersect;
+	double					m_distance;
 };
+
+
 
 RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 {
-	std::vector<HitInformaionStruct> hitsDetected;
-	Vector3d pointOfIntersect;
+	std::vector<IntersectionRecord> hitsDetected;
 	for (auto i = m_objects.begin(); i != m_objects.end(); ++i)
 	{
+		Vector3d pointOfIntersect;
 		if (LpcMath::IsCollision(testRay, (**i), pointOfIntersect))
 		{
-			HitInformaionStruct hitInfo;
-			hitInfo.m_hitMaterial = (*i)->GetLastMaterialHit();
+			IntersectionRecord hitInfo;
+			hitInfo.m_rayHit = &testRay;
+			hitInfo.m_objectHit = *i;
+			hitInfo.m_pointOfIntersect = pointOfIntersect;
 			hitInfo.m_distance = ((*i)->GetPosition() - testRay.GetPosition()).length();
 			hitsDetected.push_back(hitInfo);
 		}
@@ -147,8 +155,7 @@ RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 
 	if (hitsDetected.size() > 0)
 	{
-		HitInformaionStruct closestHit;
-		closestHit.m_hitMaterial = COLOR_WHITE;
+		IntersectionRecord closestHit;
 		closestHit.m_distance = std::numeric_limits<double>::max();
 
 		for (auto i = hitsDetected.begin(); i != hitsDetected.end(); ++i)
@@ -159,10 +166,74 @@ RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 			}
 		}
 
-		return closestHit.m_hitMaterial;
+		std::vector<const Light*> hitLights;
+
+		// from here, now go find out how many lights this hits
+		for (auto i = m_lights.begin(); i != m_lights.end(); ++i)
+		{
+			// build ray to light
+			Vector3d dirToLight((*i)->GetPosition() - closestHit.m_pointOfIntersect);
+			dirToLight.NormalizeVector();
+			Ray rayToLight;
+			rayToLight.Init(closestHit.m_pointOfIntersect, dirToLight);
+			// move ray a bit off the intersect point
+			rayToLight.MoveByDelta(0.001);
+			// test collision
+			if (LightCollision(*i, rayToLight))
+			{
+				//IntersectionRecordLight lightHitRecord;
+				//lightHitRecord.m_light = *i;
+				//lightHitRecord.m_rayHit = rayToLight;
+				// pass, add to list
+				hitLights.push_back(*i);
+			}
+		}
+
+		// ok, send in list of lights hit to material for processing
+		return closestHit.m_objectHit->CalculateMaterialHit(testRay, closestHit.m_pointOfIntersect, hitLights).ToRGBA();
+		return closestHit.m_objectHit->GetMaterial().GetColor().ToRGBA();
 	}
 
-	return COLOR_WHITE;
+	return COLOR_BLACK;
+}
+
+bool WorldManager::LightCollision(const Light* light, const Ray& rayToLight) const
+{
+	std::vector<IntersectionRecord> hitsDetected;
+	for (auto i = m_objects.begin(); i != m_objects.end(); ++i)
+	{
+		Vector3d pointOfIntersect;
+		if (LpcMath::IsCollision(rayToLight, (**i), pointOfIntersect))
+		{
+			IntersectionRecord hitInfo;
+			hitInfo.m_rayHit = &rayToLight;
+			hitInfo.m_objectHit = *i;
+			hitInfo.m_pointOfIntersect = pointOfIntersect;
+			hitInfo.m_distance = ((*i)->GetPosition() - rayToLight.GetPosition()).length();
+			hitsDetected.push_back(hitInfo);
+		}
+	}
+
+	if (hitsDetected.size() > 0)
+	{
+		IntersectionRecord closestHit;
+		closestHit.m_distance = std::numeric_limits<double>::max();
+
+		for (auto i = hitsDetected.begin(); i != hitsDetected.end(); ++i)
+		{
+			if ((*i).m_distance >= 0 && (*i).m_distance < closestHit.m_distance)
+			{
+				closestHit = *i;
+			}
+		}
+
+		if (closestHit.m_distance <= (rayToLight.GetPosition() - light->GetPosition()).length())
+		{
+			return false;
+		}
+	}
+
+	return true;
 }
 
 void WorldManager::UpdateRays()

@@ -1,0 +1,23 @@
+- type: light
+  position: [-10, 0, 100]
+  material: [255, 255, 255]
+  lighting: [255, 255, 255]
+- type: sphere
+  position: [5, 5, -10]
+  material: [255, 50, 50]
+  radius: 5
+- type: sphere
+  position: [5, -5, -10]
+  material: [50, 255, 50]
+  radius: 5
+- type: sphere
+  position: [5, 2.5, -100.5]
+  material: [50, 50, 255]
+  radius: 5
+- type: camera
+  position: [-10, 0, 100]
+  direction: [0, 0, -1]
+  plane1: [0, 0, 0]
+  plane2: [0, 0, 0]
+- type: image
+  resolution: [600, 600, 0]

@@ -36,6 +36,11 @@ void InfinitePlane::Init(const Vector3d& pos, const Vector3d& dir)
 	m_direction = dir.Normalize();
 }
 
+const Vector3d& InfinitePlane::GetNormal(const Vector3d& intersectPoint) const
+{
+	return m_direction;
+}
+
 bool InfinitePlane::operator == (const InfinitePlane& rhs) const
 {
 	return m_position == rhs.GetPosition() && m_direction == rhs.GetDirection();

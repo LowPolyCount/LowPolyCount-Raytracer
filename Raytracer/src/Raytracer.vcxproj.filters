@@ -109,6 +109,9 @@
     <ClInclude Include="Material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -174,9 +177,15 @@
     <ClCompile Include="Material.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files\CollidableObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Object.yaml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="LightSphere.yaml">
       <Filter>Data</Filter>
     </None>
   </ItemGroup>

@@ -4,7 +4,7 @@
 #include <memory>
 #include "CollidableObject.h"
 #include "Camera.h"
-
+#include "Light.h"
 
 
 class IRenderer;
@@ -23,10 +23,12 @@ protected:
 	void UpdateRays();
 	void RunThroughSimulation();
 	RGBA FindIfIntersect(const Ray& testRay);
+	bool LightCollision(const Light* light, const Ray& rayToLight) const;
 	void DrawImage();
 	std::vector<CollidableObject*>	m_objects;
 	std::vector<std::vector<Ray>>	m_currentScene;
 	std::unique_ptr<IFileLoader>	m_loader;
+	std::vector<Light*>				m_lights;
 	Camera*			m_camera;
 	IRenderer*		m_image;
 	//std::unique_ptr<Camera*>		m_camera;

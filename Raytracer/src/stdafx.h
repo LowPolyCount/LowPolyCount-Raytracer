@@ -19,6 +19,7 @@
 #include <gtest\gtest.h>
 #include <iostream>
 
+ 
 namespace lpc
 {
 	bool AlmostEqualRelative(double A, double B, double maxRelDiff);

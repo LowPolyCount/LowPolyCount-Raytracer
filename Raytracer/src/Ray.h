@@ -20,9 +20,11 @@ public:
 	inline const Vector3d& GetDirection() const { return m_direction; }
 	inline void SetPosition(const Vector3d& pos) { m_position = pos; }
 	inline void SetDirection(const Vector3d& dir) { m_direction = dir; }
+	virtual const Vector3d& GetNormal(const Vector3d& intersectPoint) const;
+	void MoveByDelta(double);
 
 private:
-	Point m_position;
+	Point m_position;	// @todo: remove Point and just use a vector3d
 	Vector3d m_direction;
 };
 

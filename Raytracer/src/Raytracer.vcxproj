@@ -97,6 +97,7 @@
     <ClInclude Include="IFileLoader.h" />
     <ClInclude Include="InfinitePlane.h" />
     <ClInclude Include="IRenderer.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="LpcMath.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="RaytracerTypes.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="CollidableObject.cpp" />
     <ClCompile Include="IFileLoader.cpp" />
     <ClCompile Include="InfinitePlane.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="LpcMath.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -141,6 +143,7 @@
     <ClCompile Include="YamlFileLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="LightSphere.yaml" />
     <None Include="Object.yaml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

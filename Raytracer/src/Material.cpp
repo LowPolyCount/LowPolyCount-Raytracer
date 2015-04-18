@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "Material.h"
 #include "DeserializeData.h"
+#include "WorldManager.h"
+#include "LpcMath.h"
 
 Material::Material()
 {
@@ -15,15 +17,13 @@ void Material::Init(const DeserializeData& data)
 {
 	for (auto i = data.m_mapVector.begin(); i != data.m_mapVector.end(); ++i)
 	{
-		//const Vector3d material;
-
 		switch ((*i).first)
 		{
 		case DeserializeData::LIGHTING:
 			m_lighting = data.m_mapVector.at(DeserializeData::LIGHTING);
 			break;
 		case DeserializeData::MATERIAL:
-			ConvertColor(data.m_mapVector.at(DeserializeData::MATERIAL));
+			m_color = data.m_mapVector.at(DeserializeData::MATERIAL);
 			break;
 		default:
 			break;
@@ -31,7 +31,7 @@ void Material::Init(const DeserializeData& data)
 	}
 }
 
-void Material::ConvertColor(const Vector3d& material)
+Vector3d Material::CalculateMaterialHit(const Ray& inRay, const Vector3d& intersectPoint, const Vector3d& normalVec, const std::vector<const Light*>& hitLights) const
 {
-	m_color = static_cast<int>(material.x) + (static_cast<int>(material.y) << 8) + (static_cast<int>(material.z) << 16);
+	return LpcMath::DiffuseLighting(inRay, intersectPoint, normalVec, hitLights, this->GetColor(), m_lighting.x, m_lighting.y, m_lighting.z);
 }

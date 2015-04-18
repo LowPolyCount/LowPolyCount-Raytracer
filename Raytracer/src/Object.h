@@ -13,6 +13,7 @@ public:
 		CT_Plane,
 		CT_InfinitePlane,
 		CT_Triangle,
+		CT_Light,
 
 		// other types of objects
 		CT_Image,

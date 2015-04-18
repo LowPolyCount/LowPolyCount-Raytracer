@@ -118,6 +118,15 @@ Vector3d Vector3d::operator-(const Vector3d& rhs) const
 	return returnVector;
 }
 
+Vector3d Vector3d::operator-() const
+{
+	Vector3d returnVector;
+	returnVector.x = -x;
+	returnVector.y = -y;
+	returnVector.z = -z;
+	return returnVector;
+}
+
 void Vector3d::operator+=(const Vector3d& rhs)
 {
 	x += rhs.x;
@@ -157,6 +166,11 @@ void Vector3d::operator /= (double scale)
 	x /= scale;
 	y /= scale;
 	z /= scale;
+}
+
+RGBA Vector3d::ToRGBA() const
+{
+	return (static_cast<int>(x) << 16) + (static_cast<int>(y) << 8) + (static_cast<int>(z));
 }
 
 string Vector3d::ToString() const

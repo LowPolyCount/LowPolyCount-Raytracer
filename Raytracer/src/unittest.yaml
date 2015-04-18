@@ -11,4 +11,20 @@
   plane1: [0, 1, 2]
   plane2: [2, 1, 0]
 - type: image
-  resolution: [256, 640, 0]
+  resolution: [25, 64, 0]
+- type: sphere
+  position: [5, 5, 5]
+  material: [100, 101, 102]
+  radius: 2
+- type: light
+  position: [4, 4, 4]
+  material: [25, 50, 75]
+  lighting: [25, 100, 255]
+- type: light
+  position: [5, 5, 10]
+  material: [25, 50, 75]
+  lighting: [25, 100, 255]
+- type: light
+  position: [10, 10, 4]
+  material: [25, 50, 75]
+  lighting: [25, 100, 255]

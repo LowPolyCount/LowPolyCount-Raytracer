@@ -9,6 +9,7 @@
 #include "Ray.h"
 #include "Triangle.h"
 #include "ErrorObject.h"
+#include "Light.h"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ Factory::Factory()
 	AddType<RendererSDL>(Object::ObjectType::CT_Image);
 	AddType<InfinitePlane>(Object::ObjectType::CT_InfinitePlane);
 	AddType<Triangle>(Object::ObjectType::CT_Triangle);
+	AddType<Light>(Object::ObjectType::CT_Light);
 	AddType<ErrorObject>(Object::ObjectType::CT_Unknown);
 }
 
