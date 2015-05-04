@@ -22,44 +22,45 @@ LpcMath::~LpcMath()
 
 double LpcMath::CalcualteAttenuation(const Light* inLight, const double distanceToLight)
 {
-	const double LIGHT_RADIUS = 5;
-	return 1 - (distanceToLight / LIGHT_RADIUS);
+	const double a = 1;
+	const double b = 1;
+	const double c = 1;
+	return 1 / (a + b*distanceToLight + c*distanceToLight*distanceToLight);
 }
 
 Vector3d LpcMath::DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoint, const Vector3d& normalVec, const std::vector<const Light*>& hitLights,
 	const Vector3d& color, double diffuseFactor, double specularFactor, double shininess)
 {
-	const double DIFFUSE = .8;
-	const double ATTENUATION = .8;
+	const double DIFFUSE_INTENSITY = 1;
+	const double AMBIENT_INTENSITY = .1;
 
-	if (hitLights.size() >= 1)
+	/*if (hitLights.size() == 0)
 	{
-		return color;
+		return Vector3d(0, 0, 0);
 	}
 
-	return color;
-	return Vector3d(0, 0, 0);
+	return color;*/
 
-	Vector3d dirToEye = -(inRay.GetDirection());
-
-	double diffuse = 0;
+	const Vector3d dirToEye = -(inRay.GetDirection());
+	Vector3d colorValue = color*AMBIENT_INTENSITY;	// ambient color
 	for (auto i = hitLights.begin(); i != hitLights.end(); ++i)
 	{
+		Vector3d diffuseColor;
+
 		const double toLightDistance = ((*i)->GetPosition() - intersectPoint).length();
 		const Vector3d dirToLight = ((*i)->GetPosition() - intersectPoint).Normalize();
 
 		const double attenuation = CalcualteAttenuation(*i, toLightDistance);
-
-		const double diffuseFactor = DIFFUSE * dirToLight.DotProduct(normalVec);
+		const double diffuseFactor = normalVec.DotProduct(dirToLight);
 
 		if (diffuseFactor > 0)
 		{
-			const double thisDiffuse = (color.ToRGBA() * diffuseFactor * (*i)->GetMaterial().GetColor().ToRGBA()) * attenuation;
-			diffuse += thisDiffuse;
+			diffuseColor = (color * (*i)->GetMaterial().GetColor()) * (DIFFUSE_INTENSITY * diffuseFactor);
+			colorValue += diffuseColor;
 		}
 
 	}
-	return Vector3d(0, 0, 0);
+	return colorValue;
 }
 
 
