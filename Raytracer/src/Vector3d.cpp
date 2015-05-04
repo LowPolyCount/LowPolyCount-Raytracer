@@ -127,6 +127,15 @@ Vector3d Vector3d::operator-() const
 	return returnVector;
 }
 
+Vector3d Vector3d::operator*(const Vector3d& scale) const
+{
+	Vector3d returnVector;
+	returnVector.x = x*scale.x;
+	returnVector.y = y*scale.y;
+	returnVector.z = z*scale.z;
+	return returnVector;
+}
+
 void Vector3d::operator+=(const Vector3d& rhs)
 {
 	x += rhs.x;

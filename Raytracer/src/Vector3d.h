@@ -21,6 +21,7 @@ public:
 	Vector3d operator-() const;
 	Vector3d operator-(const Vector3d& rhs) const;
 	Vector3d operator+(const Vector3d& rhs) const;
+	Vector3d operator*(const Vector3d& scale) const;
 	Vector3d operator*(double scale) const;
 	Vector3d operator/(double scale) const;
 	void operator+=(const Vector3d& rhs);
