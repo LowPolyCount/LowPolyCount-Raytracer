@@ -18,6 +18,9 @@ public:
 	virtual void Init(int inX, int inY) = 0;
 	virtual void InitRenderer() = 0;
 
+	virtual void LockForDrawing() = 0;
+	virtual void UnlockAfterDrawing() = 0;
+
 	virtual void SetPixel(int inX, int inY, const RGBA& inColor) = 0;
 	virtual void Draw() = 0;
 };

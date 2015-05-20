@@ -116,6 +116,7 @@ void WorldManager::RunThroughSimulation()
 	const int width = m_image->GetWidth();
 	const int height = m_image->GetHeight();
 
+	m_image->LockForDrawing();
 	for (int j = 0; j < height; j++)
 	{
 		for (int i = 0; i<width; i++)
@@ -124,6 +125,7 @@ void WorldManager::RunThroughSimulation()
 			m_image->SetPixel(i, j, hitColor);
 		}
 	}
+	m_image->UnlockAfterDrawing();
 }
 
 struct IntersectionRecord

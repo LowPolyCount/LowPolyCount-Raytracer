@@ -179,7 +179,7 @@ void Vector3d::operator /= (double scale)
 
 RGBA Vector3d::ToRGBA() const
 {
-	return (static_cast<int>(x) << 16) + (static_cast<int>(y) << 8) + (static_cast<int>(z));
+	return (static_cast<uint8_t>(x) << 24) + (static_cast<uint8_t>(y) << 16) + (static_cast<uint8_t>(z) << 8);
 }
 
 string Vector3d::ToString() const

@@ -52,7 +52,7 @@ TEST(Render, WorldManager)
 	testWorld.InitSystems(file);
 	EXPECT_TRUE(testWorld.Init("unittest.yaml"));
 
-	testWorld.Render(false);
+	testWorld.TestUpdateRays();
 	const vector<vector<Ray>>& scene = testWorld.GetCurrentScene();
 
 	EXPECT_EQ(scene.size(), testWorld.GetImage()->GetWidth());

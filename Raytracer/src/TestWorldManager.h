@@ -13,6 +13,7 @@ public:
 	bool TestLightCollision(const Light* light, const Ray& rayToLight) const { return LightCollision(light, rayToLight); }
 	virtual IRenderer* GetImage() { return m_image; }
 	Camera* GetCamera() { return m_camera; }
+	void TestUpdateRays() { UpdateRays(); }
 	const std::vector < std::vector<Ray>>& GetCurrentScene() { return m_currentScene; }
 };
 
