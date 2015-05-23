@@ -111,9 +111,6 @@
       <CLRUnmanagedCodeCheck>false</CLRUnmanagedCodeCheck>
       <AdditionalLibraryDirectories>$(DXSDK_DIR)\lib\x86</AdditionalLibraryDirectories>
     </Link>
-    <PostBuildEvent>
-      <Command>copy /Y "$(TargetDir)$(ProjectName).dll" "$(SolutionDir)$(Configuration)\$(ProjectName).dll"</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -489,4 +486,10 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <Target Name="AfterCompile">
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll" 
+          DestinationFolder="$(SolutionDir)$(Configuration)\$(ProjectName).dll"
+          OverwriteReadOnlyFiles="true" 
+          SkipUnchangedFiles="false" />  
+  </Target>
 </Project>
