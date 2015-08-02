@@ -4,6 +4,8 @@
 #include "WorldManager.h"
 #include "LpcMath.h"
 
+using namespace std;
+
 Material::Material()
 {
 
@@ -31,7 +33,7 @@ void Material::Init(const DeserializeData& data)
 	}
 }
 
-Vector3d Material::CalculateMaterialHit(const Ray& inRay, const Vector3d& intersectPoint, const Vector3d& normalVec, const std::vector<const Light*>& hitLights) const
+Vector3d Material::CalculateMaterialHit(const Ray& inRay, const Vector3d& intersectPoint, const Vector3d& normalVec, const vector<const shared_ptr<Light>>& hitLights) const
 {
 	return LpcMath::DiffuseLighting(inRay, intersectPoint, normalVec, hitLights, this->GetColor(), m_lighting.x, m_lighting.y, m_lighting.z);
 }

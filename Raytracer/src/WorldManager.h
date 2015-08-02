@@ -17,21 +17,19 @@ public:
 	void InitSystems(std::unique_ptr<IFileLoader>& inFileLoader);
 	bool Init(const std::string& fileName);
 	void Render(bool createRenderer);
-	inline const IRenderer* const GetImage() { return m_image; }
+	inline const std::shared_ptr<IRenderer> GetImage() const { return m_image; }
 protected:
 	typedef std::vector<std::unique_ptr<CollidableObject>> VectorOfObjectPtr;
 	void UpdateRays();
 	void RunThroughSimulation();
 	RGBA FindIfIntersect(const Ray& testRay);
-	bool LightCollision(const Light* light, const Ray& rayToLight) const;
+	bool LightCollision(const std::shared_ptr<Light> light, const Ray& rayToLight) const;
 	void DrawImage();
-	std::vector<CollidableObject*>	m_objects;
-	std::vector<std::vector<Ray>>	m_currentScene;
-	std::unique_ptr<IFileLoader>	m_loader;
-	std::vector<Light*>				m_lights;
-	Camera*			m_camera;
-	IRenderer*		m_image;
-	//std::unique_ptr<Camera*>		m_camera;
-	//std::unique_ptr<IRenderer*>		m_image;
+	std::vector<std::shared_ptr<CollidableObject>>		m_objects;
+	std::vector<std::vector<Ray>>		m_currentScene;
+	std::unique_ptr<IFileLoader>		m_loader;
+	std::vector<std::shared_ptr<Light>>	m_lights;
+	std::shared_ptr<Camera>				m_camera;
+	std::shared_ptr<IRenderer>			m_image;
 };
 

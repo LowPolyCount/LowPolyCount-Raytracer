@@ -179,7 +179,11 @@ void Vector3d::operator /= (double scale)
 
 RGBA Vector3d::ToRGBA() const
 {
-	return (static_cast<uint8_t>(x) << 24) + (static_cast<uint8_t>(y) << 16) + (static_cast<uint8_t>(z) << 8);
+	uint8_t r = (x < 255) ? static_cast<uint8_t>(x) : 255;
+	uint8_t g = (y < 255) ? static_cast<uint8_t>(y) : 255;
+	uint8_t b = (z < 255) ? static_cast<uint8_t>(z) : 255;
+	return (static_cast<uint8_t>(r) << 24) + (static_cast<uint8_t>(g) << 16) + (static_cast<uint8_t>(b) << 8);
+	//return (static_cast<unsigned int>(x) << 24) + (static_cast<unsigned int>(y) << 16) + (static_cast<unsigned int>(z) << 8);
 }
 
 string Vector3d::ToString() const
@@ -354,4 +358,9 @@ TEST(ToString, Vector3d)
 
 	//EXPECT_TRUE
 	EXPECT_EQ(test.ToString(), string("5.000000 2.000000 1.000000"));
+}
+
+TEST(ToRGBA, Vector3d)
+{
+
 }

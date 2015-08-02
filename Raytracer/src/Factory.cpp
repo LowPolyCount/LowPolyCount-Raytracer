@@ -13,12 +13,13 @@
 
 using namespace std;
 
-static const std::string ERROR("Factory Object Not Found");
+static const string ERROR("Factory Object Not Found");
 
+// this function does the actual creation and init of a given object type
 template<class Type>
-static Object* CreateType(const DeserializeData& data)
+static shared_ptr<Object> CreateType(const DeserializeData& data)
 {
-	Object* returnValue = new Type();
+	shared_ptr<Object> returnValue = make_shared<Type>();
 	returnValue->Init(data);
 	return returnValue;
 }
@@ -42,27 +43,22 @@ Factory::~Factory()
 {
 }
 
+// associate a templated creation function with an object type
 template<class Type>
 void Factory::AddType(Object::ObjectType worldType)
 {
 	ComponentFactoryFuncPtr function = &CreateType<Type>;
-	m_templateMap.insert(std::make_pair(worldType, function));
+	m_templateMap.insert(make_pair(worldType, function));
 }
 
-//TODO: Return a smartpointer
-Object* Factory::Create(const DeserializeData& data)
+shared_ptr<Object> Factory::Create(const DeserializeData& data)
 {
-	Object* returnValue = nullptr;
-	ComponentFactoryFuncPtr find = m_templateMap.at(data.m_type);
+	ComponentFactoryFuncPtr objectCreateFunction = m_templateMap.at(data.m_type);
 
-	if (find)
+	if (objectCreateFunction)
 	{
-		returnValue = find(data);
+		return objectCreateFunction(data);
 	}
-	else
-	{
-		returnValue = new ErrorObject(ERROR);
-	}
-	
-	return returnValue;
+
+	return make_shared<ErrorObject>(ERROR);
 }

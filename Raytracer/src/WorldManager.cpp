@@ -26,13 +26,7 @@ WorldManager::WorldManager()
 
 WorldManager::~WorldManager()
 {
-	delete m_camera;
-	delete m_image;
 
-	for (auto iter = m_objects.begin(); iter != m_objects.end(); ++iter)
-	{
-		delete *iter;
-	}
 }
 
 void WorldManager::InitSystems(std::unique_ptr<IFileLoader>& inFileLoader)
@@ -58,21 +52,21 @@ bool WorldManager::Init(const std::string& fileName)
 	for (auto iter = worldData.begin(); iter != worldData.end(); ++iter)
 	{
 		const DeserializeData objData = *iter;
-		Object* worldObj = factoryMethod.Create(objData);
+		shared_ptr<Object> worldObj = factoryMethod.Create(objData);
 		
 		switch (worldObj->GetType())
 		{
 		case Object::ObjectType::CT_Camera:
-			m_camera = static_cast<Camera*>(worldObj);
+			m_camera = tr1::static_pointer_cast<Camera>(worldObj);
 			break;
 		case Object::ObjectType::CT_Image:
-			m_image = static_cast<IRenderer*>(worldObj);
+			m_image = tr1::static_pointer_cast<IRenderer>(worldObj);
 			break;
 		case Object::ObjectType::CT_Light:
-			m_lights.push_back(static_cast<Light*>(worldObj));
+			m_lights.push_back(tr1::static_pointer_cast<Light>(worldObj));
 			break;
 		case Object::ObjectType::CT_Error:
-			cout << "WorldManager::Init - Error" << endl << static_cast<ErrorObject*>(worldObj)->GetError() << endl;
+			cout << "WorldManager::Init - Error" << endl << tr1::static_pointer_cast<ErrorObject>(worldObj)->GetError() << endl;
 			noError = false;
 			break;
 		case Object::ObjectType::CT_Unknown:
@@ -81,7 +75,7 @@ bool WorldManager::Init(const std::string& fileName)
 			break;
 		//TODO: Should probably put all collidableTypes here. 
 		default:
-			m_objects.push_back(static_cast<CollidableObject*>(worldObj));
+			m_objects.push_back(tr1::static_pointer_cast<CollidableObject>(worldObj));
 			break;
 		}
 	}
@@ -115,11 +109,20 @@ void WorldManager::RunThroughSimulation()
 {
 	const int width = m_image->GetWidth();
 	const int height = m_image->GetHeight();
-
+	//@todo with height are actually reversed.  
 	m_image->LockForDrawing();
 	for (int j = 0; j < height; j++)
 	{
 		for (int i = 0; i<width; i++)
+		{
+			RGBA hitColor = FindIfIntersect(m_currentScene[i][j]);
+			m_image->SetPixel(i, j, hitColor);
+		}
+	}
+
+	for (int j = 290; j < 300; j++)
+	{
+		for (int i = 300; i<301; i++)
 		{
 			RGBA hitColor = FindIfIntersect(m_currentScene[i][j]);
 			m_image->SetPixel(i, j, hitColor);
@@ -131,7 +134,7 @@ void WorldManager::RunThroughSimulation()
 struct IntersectionRecord
 {
 	const Ray*				m_rayHit;
-	const CollidableObject* m_objectHit;
+	std::shared_ptr<const CollidableObject> m_objectHit;
 	Vector3d				m_pointOfIntersect;
 	double					m_distance;
 };
@@ -167,8 +170,8 @@ RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 				closestHit = *i;
 			}
 		}
-
-		std::vector<const Light*> hitLights;
+		
+		std::vector<const std::shared_ptr<Light>> hitLights;
 
 		// from here, now go find out how many lights this hits
 		for (auto i = m_lights.begin(); i != m_lights.end(); ++i)
@@ -199,7 +202,7 @@ RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 	return COLOR_BLACK;
 }
 
-bool WorldManager::LightCollision(const Light* light, const Ray& rayToLight) const
+bool WorldManager::LightCollision(const shared_ptr<Light> light, const Ray& rayToLight) const
 {
 	std::vector<IntersectionRecord> hitsDetected;
 	for (auto i = m_objects.begin(); i != m_objects.end(); ++i)

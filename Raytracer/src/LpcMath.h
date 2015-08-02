@@ -19,8 +19,8 @@ public:
 	//LpcMath();
 	//~LpcMath();
 	static bool IsCollision(const CollidableObject& obj1, const CollidableObject& obj2, Vector3d& pointOfIntersect);
-	static Vector3d DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoint, const Vector3d& normalVec, const std::vector<const Light*>& hitLights,
-								const Vector3d& color, double diffuseFactor, double specularFactor, double shininess);
+	static Vector3d DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoint, const Vector3d& normalVec, 
+		const std::vector<const std::shared_ptr<Light>>& hitLights, const Vector3d& color, double diffuseFactor, double specularFactor, double shininess);
 
 private:
 	static bool IsCollisionPoint(const Ray& obj1, const Point& rhs, Vector3d& pointOfIntersect);

@@ -30,13 +30,9 @@
   point3: [0, -10, -5]
   material: [0, 0, 100]
 - type: light
-  position: [-10, -10, -25]
-  material: [25, 50, 75]
-  lighting: [25, 100, 255]
-- type: light
   position: [25, -25, 0]
   material: [255, 255, 255]
-  lighting: [255, 255, 255]
+  lighting: [125, 125, 125]
 - type: camera
   position: [0, 0, 100]
   direction: [0, 0, -1]
