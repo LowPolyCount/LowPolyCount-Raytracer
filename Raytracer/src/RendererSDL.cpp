@@ -133,12 +133,6 @@ void RendererSDL::InitRenderer()
 void RendererSDL::LockForDrawing()
 {
 	void* pixels = nullptr;
-	/*if (SDL_LockSurface(m_screenSurface) != 0)
-	{
-		cout << "Error on Locking Surface: " << SDL_GetError() << endl;
-		SDL_ClearError();
-		return;
-	}*/
 
 	if (SDL_LockTexture(m_texture, &m_screenSurface->clip_rect, &pixels, &m_screenSurface->pitch) != 0)
 	{
@@ -147,6 +141,7 @@ void RendererSDL::LockForDrawing()
 		return;
 	}
 
+	// @todo: framebuffer should remain unchanged after lock/unlock, but we update it here anyway for when it's used in Draw()
 	m_frameBuffer = static_cast<RGBA*>(pixels);
 
 }
@@ -154,21 +149,10 @@ void RendererSDL::LockForDrawing()
 void RendererSDL::UnlockAfterDrawing()
 {
 	SDL_UnlockTexture(m_texture);
-	//SDL_UnlockSurface(m_screenSurface);
-	//SDL_UpdateTexture(m_texture, NULL, m_frameBuffer, 640 * sizeof (Uint32));
-
-	//m_frameBuffer = nullptr;
 }
 
 void RendererSDL::Draw()
 {
-	//SDL_UpdateTexture(m_texture, NULL, m_screenSurface->pixels, m_screenSurface->pitch);
-	//when your drawing is done, and finally call 
-	//SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
-
-	//SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
-	//SDL_UpdateWindowSurface(m_window);
-
 	if (SDL_UpdateTexture(m_texture, NULL, m_frameBuffer, m_screenSurface->pitch) != 0)
 	{
 		cout << "Error on Updating Texture: " << SDL_GetError() << endl;
@@ -186,7 +170,6 @@ void RendererSDL::Draw()
 		SDL_ClearError();
 	}
 	SDL_RenderPresent(m_renderer);
-	//SDL_UpdateWindowSurface(m_window);
 
 	m_frameBuffer = nullptr;
 }
@@ -210,19 +193,19 @@ void RendererSDL::SetPixel(int inX, int inY, const RGBA& inColor)
 
 TEST(constructor, RendererSDL)
 {
-	int x = 5;
-	int y = 5;
+	const int x = 5;
+	const int y = 5;
 	RendererSDL test1(x, y);
-
+	test1.InitRenderer();
 	const RGBA* tt = test1.GetFrameBuffer();
-
-	// @TODO: Figure out better way to test if frame buffer was constructed correctly or not
-	/*for (int i = 0; i < x; ++i)
+	
+	// make sure bg color was used
+	for (int i = 0; i < x; ++i)
 	{
 		for (int j = 0; j < y; ++j)
 		{
 			ASSERT_EQ(BACKGROUND_COLOR, test1.GetFrameBuffer()[i*j]);
 		}
-	}*/
+	}
 	
 }
