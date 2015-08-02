@@ -109,7 +109,7 @@ void WorldManager::RunThroughSimulation()
 {
 	const int width = m_image->GetWidth();
 	const int height = m_image->GetHeight();
-	//@todo with height are actually reversed.  
+
 	m_image->LockForDrawing();
 	for (int j = 0; j < height; j++)
 	{
@@ -120,25 +120,17 @@ void WorldManager::RunThroughSimulation()
 		}
 	}
 
-	for (int j = 290; j < 300; j++)
+	// for testing purposes
+	/*for (int j = 290; j < 300; j++)
 	{
 		for (int i = 300; i<301; i++)
 		{
 			RGBA hitColor = FindIfIntersect(m_currentScene[i][j]);
 			m_image->SetPixel(i, j, hitColor);
 		}
-	}
+	}*/
 	m_image->UnlockAfterDrawing();
 }
-
-struct IntersectionRecord
-{
-	const Ray*				m_rayHit;
-	std::shared_ptr<const CollidableObject> m_objectHit;
-	Vector3d				m_pointOfIntersect;
-	double					m_distance;
-};
-
 
 
 RGBA WorldManager::FindIfIntersect(const Ray& testRay)
@@ -177,19 +169,17 @@ RGBA WorldManager::FindIfIntersect(const Ray& testRay)
 		for (auto i = m_lights.begin(); i != m_lights.end(); ++i)
 		{
 			// build ray to light
-			Vector3d dirToLight((*i)->GetPosition() - closestHit.m_pointOfIntersect);
-			dirToLight.NormalizeVector();
 			Ray rayToLight;
+			Vector3d dirToLight((*i)->GetPosition() - closestHit.m_pointOfIntersect);
+
+			dirToLight.NormalizeVector();
 			rayToLight.Init(closestHit.m_pointOfIntersect, dirToLight);
+
 			// move ray a bit off the intersect point
 			rayToLight.MoveByDelta(0.001);
-			// test collision
+
 			if (LightCollision(*i, rayToLight))
 			{
-				//IntersectionRecordLight lightHitRecord;
-				//lightHitRecord.m_light = *i;
-				//lightHitRecord.m_rayHit = rayToLight;
-				// pass, add to list
 				hitLights.push_back(*i);
 			}
 		}
