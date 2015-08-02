@@ -26,5 +26,10 @@ private:
 	Point		m_position;
 	double		m_radius;
 	double		m_radiusSqr;
+
+	//@todo: We don't technically have a normal, but using this removes "warning C4172: returning address of local variable or temporary" when calling getNormal
+	// may want to consider having GetNormal() return a copy instead of a reference
+	//@todo: this is mutable just until GetNormal() returns a copy
+	mutable Vector3d	m_normal;
 };
 

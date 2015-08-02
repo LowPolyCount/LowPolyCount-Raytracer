@@ -3,6 +3,10 @@
 #include "CollidableObject.h"
 
 // TOOD: Rename to something more appropriate
+/*
+This Plane class is currently used only by the camera.  For other classes, use InfinitePlane class
+@todo: Remove camera's use of this class and instead use InfinitePlane
+*/
 struct DeserializeData;
 class Plane : public CollidableObject
 {
@@ -22,5 +26,7 @@ public:
 private:
 	Vector3d	m_upperLeft;
 	Vector3d	m_lowerRight;
+	//@todo: We don't technically have a normal, but using this removes "warning C4172: returning address of local variable or temporary" when calling getNormal
+	Vector3d	m_normal;		
 };
 

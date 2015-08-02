@@ -36,7 +36,7 @@ void Plane::Init(const Vector3d& upperLeft, const Vector3d& lowerRight)
 
 const Vector3d& Plane::GetNormal(const Vector3d& intersectPoint) const
 {
-	return Vector3d(0, 0, 0);
+	return m_normal;
 }
 
 
