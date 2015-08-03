@@ -1,12 +1,15 @@
 #include "stdafx.h"
-#include "Vector3d.h"
 #include <gtest\gtest.h>
 #include <math.h>
 #include <float.h>
 #include <iostream>
-//#include "IRenderer.h"	//@TODO: Keep until we move materials to another class
+#include "Vector3d.h"
 
 using namespace std;
+
+static const int RED_BITSHIFT = 24;
+static const int GREEN_BITSHIFT = 16;
+static const int BLUE_BITSHIFT = 8;
 
 Vector3d::Vector3d()
 :x(0)
@@ -177,19 +180,39 @@ void Vector3d::operator /= (double scale)
 	z /= scale;
 }
 
+
+void Vector3d::NormalizeColorValues()
+{
+	x /= MAX_COLORVALUE;
+	y /= MAX_COLORVALUE;
+	z /= MAX_COLORVALUE;
+}
+
 RGBA Vector3d::ToRGBA() const
 {
-	uint8_t r = (x < 255) ? static_cast<uint8_t>(x) : 255;
+	const uint8_t r = (x > 1) ? static_cast<uint8_t>(MAX_COLORVALUE) : static_cast<uint8_t>(MAX_COLORVALUE * x);
+	const uint8_t g = (y > 1) ? static_cast<uint8_t>(MAX_COLORVALUE) : static_cast<uint8_t>(MAX_COLORVALUE * y);
+	const uint8_t b = (z > 1) ? static_cast<uint8_t>(MAX_COLORVALUE) : static_cast<uint8_t>(MAX_COLORVALUE * z);
+
+	return (static_cast<uint8_t>(r) << RED_BITSHIFT) + (static_cast<uint8_t>(g) << GREEN_BITSHIFT) + (static_cast<uint8_t>(b) << BLUE_BITSHIFT);
+
+	/*uint8_t r = (x < 255) ? static_cast<uint8_t>(x) : 255;
 	uint8_t g = (y < 255) ? static_cast<uint8_t>(y) : 255;
 	uint8_t b = (z < 255) ? static_cast<uint8_t>(z) : 255;
-	return (static_cast<uint8_t>(r) << 24) + (static_cast<uint8_t>(g) << 16) + (static_cast<uint8_t>(b) << 8);
+	return (static_cast<uint8_t>(r) << 24) + (static_cast<uint8_t>(g) << 16) + (static_cast<uint8_t>(b) << 8);*/
 	//return (static_cast<unsigned int>(x) << 24) + (static_cast<unsigned int>(y) << 16) + (static_cast<unsigned int>(z) << 8);
 }
 
 string Vector3d::ToString() const
 {
 	return to_string(x) + string(" ") + to_string(y) + string(" ") + to_string(z);
-	
+
+	// TODO: Make make this ToRGBAToString() or something
+	/*uint8_t r = (x < 255) ? static_cast<uint8_t>(x) : 255;
+	uint8_t g = (y < 255) ? static_cast<uint8_t>(y) : 255;
+	uint8_t b = (z < 255) ? static_cast<uint8_t>(z) : 255;
+
+	return to_string(r) + string(" ") + to_string(g) + string(" ") + to_string(b);*/
 }
 
 TEST(Length, Vector3d)
@@ -362,5 +385,16 @@ TEST(ToString, Vector3d)
 
 TEST(ToRGBA, Vector3d)
 {
+	// values go from 0.0f - 1.0f. 1.0 is 255 in RGB terms
+	const Vector3d maxValue(2.0, 2.0, 2.0);
+
+	const RGBA maxResult = (static_cast<uint8_t>(Vector3d::MAX_COLORVALUE) << RED_BITSHIFT) 
+		+ (static_cast<uint8_t>(Vector3d::MAX_COLORVALUE) << GREEN_BITSHIFT) 
+		+ (static_cast<uint8_t>(Vector3d::MAX_COLORVALUE) << BLUE_BITSHIFT);
+	EXPECT_EQ(maxValue.ToRGBA(), maxResult);
+
+	const Vector3d midValue(.5, .5, .5);
+	const RGBA midResult = (static_cast<uint8_t>(127) << RED_BITSHIFT) + (static_cast<uint8_t>(127) << GREEN_BITSHIFT) + (static_cast<uint8_t>(127) << BLUE_BITSHIFT);
+	EXPECT_EQ(midValue.ToRGBA(), midResult);
 
 }

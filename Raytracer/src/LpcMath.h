@@ -29,7 +29,7 @@ private:
 	static bool IsCollisionInfinitePlane(const Ray& obj1, const InfinitePlane& rhs, Vector3d& pointOfIntersect);
 	static bool IsCollisionTriangle(const Ray& obj1, const Triangle& rhs, Vector3d& pointOfIntersect);
 
-	static double CalcualteAttenuation(const Light* inLight, const double distanceToLight);
+	static double CalcualteAttenuation(const std::shared_ptr<Light> inLight, const double distanceToLight);
 
 };
 

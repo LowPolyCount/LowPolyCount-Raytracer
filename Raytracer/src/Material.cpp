@@ -26,6 +26,7 @@ void Material::Init(const DeserializeData& data)
 			break;
 		case DeserializeData::MATERIAL:
 			m_color = data.m_mapVector.at(DeserializeData::MATERIAL);
+			m_color.NormalizeColorValues();
 			break;
 		default:
 			break;

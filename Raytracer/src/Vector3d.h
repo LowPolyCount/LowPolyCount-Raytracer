@@ -5,6 +5,8 @@
 class Vector3d
 {
 public:
+	static const uint8_t MAX_COLORVALUE = 255;
+
 	Vector3d();
 	Vector3d(double inX, double inY, double inZ);
 	Vector3d(const Vector3d& inVector);
@@ -28,7 +30,11 @@ public:
 	void operator-=(const Vector3d& rhs);
 	void operator*=(double scale);
 	void operator/=(double scale);
+	
+	//@todo: consider moving these into it's own colorvector class or some such.
+	void NormalizeColorValues();
 	RGBA ToRGBA() const;
+
 	std::string ToString() const;
 
 	double x, y, z;

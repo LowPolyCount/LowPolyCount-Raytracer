@@ -21,7 +21,7 @@ LpcMath::~LpcMath()
 {
 }*/
 
-double LpcMath::CalcualteAttenuation(const Light* inLight, const double distanceToLight)
+double LpcMath::CalcualteAttenuation(const shared_ptr<Light> inLight, const double distanceToLight)
 {
 	const double a = 1;
 	const double b = 1;
@@ -38,7 +38,7 @@ Vector3d LpcMath::DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoi
 	Vector3d returnValue = Vector3d(0, 0, 0);
 	const Vector3d dirToEye = -(inRay.GetDirection());
 	//Vector3d colorValue =  surfaceColor*AMBIENT_INTENSITY;	// ambient color
-	return surfaceColor;
+	//return surfaceColor;
 	if (hitLights.size() == 0)
 	{
 		returnValue = surfaceColor*AMBIENT_INTENSITY;
@@ -46,6 +46,7 @@ Vector3d LpcMath::DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoi
 	
 	for (auto i = hitLights.begin(); i != hitLights.end(); ++i)
 	{
+		
 		//Vector3d diffuseColor;
 
 		const double toLightDistance = ((*i)->GetPosition() - intersectPoint).length();
@@ -53,10 +54,12 @@ Vector3d LpcMath::DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoi
 		const Vector3d dirToLight = ((*i)->GetPosition() - intersectPoint).Normalize();
 		const Vector3d lightColor = (*i)->GetMaterial().GetColor();
 
-		//const double attenuation = CalcualteAttenuation(*i, toLightDistance);
+		return (lightColor + surfaceColor) / 2;
+
+		const double attenuation = CalcualteAttenuation(*i, toLightDistance);
 
 		// ambient
-		const Vector3d ambientColor = (lightColor)*(surfaceColor);
+		const Vector3d ambientColor = (lightColor)*((surfaceColor)*AMBIENT_INTENSITY);
 
 		// diffuse
 		//const double diffuseDotProduct = (surfaceNormal).DotProduct(dirToLight);
@@ -64,11 +67,13 @@ Vector3d LpcMath::DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoi
 		const double diffuseDotProduct = std::max((surfaceNormal).DotProduct(dirToLight), static_cast<double>(0));
 		//const double diffuseDotProduct = 0;
 		//cout << (diffuseDotProduct) << " ";// << endl;
-		//const Vector3d diffuseColor = (lightColor*surfaceColor)*diffuseDotProduct*DIFFUSE_INTENSITY;
-		const Vector3d diffuseColor = Vector3d(0, 0, 0);
+		//const Vector3d diffuseColor = (diffuseDotProduct*DIFFUSE_INTENSITY)/2;
+		//const Vector3d diffuseColor = Vector3d(0, 0, 0);
 		//cout << diffuseColor.x << " " << diffuseColor.y << " " << diffuseColor.z << " ";
 		//cout << diffuseColor.ToRGBA() << endl;
-		returnValue += (ambientColor + diffuseColor);
+		//cout << diffuseColor.ToString() << endl;
+		//returnValue += (ambientColor + diffuseColor);
+		returnValue += (ambientColor);
 		//return colorValue;
 	}
 	return returnValue;

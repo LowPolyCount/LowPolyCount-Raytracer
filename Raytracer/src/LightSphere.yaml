@@ -21,4 +21,4 @@
   plane1: [0, 0, 0]
   plane2: [0, 0, 0]
 - type: image
-  resolution: [1200, 1200, 0]
+  resolution: [600, 600, 0]
