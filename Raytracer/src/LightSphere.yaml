@@ -15,6 +15,25 @@
   position: [5, 2.5, -15]
   material: [50, 50, 255]
   radius: 5
+- type: sphere
+  position: [15, 2.5, -15]
+  material: [50, 50, 255]
+  radius: 5
+#- type: triangle
+ # point1: [100, 2.5, -10] # x up is positive, y right is positive, z, away is positive
+  #point2: [, -10, -10]
+  #point3: [10, -10, -10]
+  m#aterial: [255, 255, 255]
+#- type: triangle   # - this causes some severe issues, investigate
+  #point1: [-10, 2.5, -100] # x up is positive, y right is positive, z, away is positive
+  #point2: [-10, 100, 0]
+  #point3: [-10, -100, 0]
+#  material: [255, 255, 255]
+#- type: triangle
+#  point1: [-20, 100, -100] # x up is positive, y right is positive, z, away is positive
+#  point2: [-20, -100, -100]
+#  point3: [-20, 0, 100]
+  #material: [255, 255, 255]
 - type: camera
   position: [-15, 0, 100]
   direction: [1, 0, -1]

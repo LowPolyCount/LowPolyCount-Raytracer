@@ -12,6 +12,11 @@
 
 using namespace std;
 
+static const double DIFFUSE_INTENSITY = .10;
+static const double AMBIENT_INTENSITY = .20;
+static const double SPECULAR_INTENSITY = .50;
+static const double SPECULAR_POWER = 8.0f;     // The specular power, used as 'glossiness' factor. 
+
 /*LpcMath::LpcMath()
 {
 }
@@ -32,49 +37,45 @@ double LpcMath::CalcualteAttenuation(const shared_ptr<Light> inLight, const doub
 Vector3d LpcMath::DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoint, const Vector3d& surfaceNormal, const vector<const shared_ptr<Light>>& hitLights,
 	const Vector3d& surfaceColor, double diffuseFactor, double specularFactor, double shininess)
 {
-	const double DIFFUSE_INTENSITY = .25;
-	const double AMBIENT_INTENSITY = .25;
-
-	Vector3d returnValue = Vector3d(0, 0, 0);
+	Vector3d returnValue(0, 0, 0);
+	const Vector3d viewingDir = inRay.GetDirection();
 	const Vector3d dirToEye = -(inRay.GetDirection());
-	//Vector3d colorValue =  surfaceColor*AMBIENT_INTENSITY;	// ambient color
-	//return surfaceColor;
-	if (hitLights.size() == 0)
-	{
-		returnValue = surfaceColor*AMBIENT_INTENSITY;
-	}
+
+	//const Vector3d ReflectedVector = inRay.GetDirection() - (surfaceNormal * 2 * (inRay.GetDirection().DotProduct(surfaceNormal)));
+
+	// ambient color
+	const Vector3d ambientColor = (surfaceColor)*AMBIENT_INTENSITY;
+
+	returnValue = ambientColor;
 	
 	for (auto i = hitLights.begin(); i != hitLights.end(); ++i)
-	{
-		
-		//Vector3d diffuseColor;
-
+	{		
 		const double toLightDistance = ((*i)->GetPosition() - intersectPoint).length();
-		//const Vector3d dirToLight = ((*i)->GetPosition() - intersectPoint).Normalize();
 		const Vector3d dirToLight = ((*i)->GetPosition() - intersectPoint).Normalize();
 		const Vector3d lightColor = (*i)->GetMaterial().GetColor();
 
-		return (lightColor + surfaceColor) / 2;
+		
 
 		const double attenuation = CalcualteAttenuation(*i, toLightDistance);
 
-		// ambient
-		const Vector3d ambientColor = (lightColor)*((surfaceColor)*AMBIENT_INTENSITY);
-
 		// diffuse
-		//const double diffuseDotProduct = (surfaceNormal).DotProduct(dirToLight);
-		//const double diffuseDotProduct = std::max((surfaceNormal).Normalize().DotProduct(dirToLight), static_cast<double>(0));
 		const double diffuseDotProduct = std::max((surfaceNormal).DotProduct(dirToLight), static_cast<double>(0));
-		//const double diffuseDotProduct = 0;
-		//cout << (diffuseDotProduct) << " ";// << endl;
-		//const Vector3d diffuseColor = (diffuseDotProduct*DIFFUSE_INTENSITY)/2;
-		//const Vector3d diffuseColor = Vector3d(0, 0, 0);
-		//cout << diffuseColor.x << " " << diffuseColor.y << " " << diffuseColor.z << " ";
-		//cout << diffuseColor.ToRGBA() << endl;
-		//cout << diffuseColor.ToString() << endl;
-		//returnValue += (ambientColor + diffuseColor);
-		returnValue += (ambientColor);
-		//return colorValue;
+		const Vector3d diffuseColor = lightColor*diffuseDotProduct*DIFFUSE_INTENSITY;
+
+		// specular
+		Vector3d halfDir = (dirToLight + -dirToEye).Normalize();
+		double specAngle = max(halfDir.DotProduct(surfaceNormal), 0.0);
+		double specular = 0;// pow(specAngle, 256);
+
+		//const Vector3d halfVector = (dirToEye + (-dirToLight)).Normalize();
+		//const Vector3d reflect = -dirToEye - surfaceNormal*(2*(-dirToEye.DotProduct(surfaceNormal)));
+		//const Vector3d reflect = viewingDir - surfaceNormal*(2 * (viewingDir.DotProduct(surfaceNormal)));
+		//const Vector3d halfVector = ((dirToEye + dirToLight)) / (dirToEye.length() + dirToLight.length()); //.Normalize();
+		//const Vector3d SpecularLighting = SpecularColor * (SpecularColorOfLight * ((NormalVector dot HalfWayVector) power SpecularReflectionPower) * Attentuation * Spotlight)
+		//const Vector3d specularColor = lightColor*pow(max(0.0, reflect.DotProduct(surfaceNormal)), 32)*SPECULAR_INTENSITY;
+		const Vector3d specularColor = lightColor*specular;
+
+		returnValue += diffuseColor + specularColor;
 	}
 	return returnValue;
 }
@@ -181,6 +182,7 @@ bool LpcMath::IsCollisionTriangle(const Ray& obj1, const Triangle& rhs, Vector3d
 	const Vector3d& normalVec = plane.GetDirection();
 
 	if (IsCollisionInfinitePlane(obj1, plane, pointOfIntersect))
+
 	{
 		// in plane, now check if intersect point is in triangle
 		bool hit1 = (rhs.GetPoint2() - rhs.GetPoint1()).CrossProduct(pointOfIntersect - rhs.GetPoint1()).DotProduct(normalVec) >= 0;
