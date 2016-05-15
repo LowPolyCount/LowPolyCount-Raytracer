@@ -51,7 +51,8 @@ Vector3d LpcMath::DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoi
 	for (auto i = hitLights.begin(); i != hitLights.end(); ++i)
 	{		
 		const double toLightDistance = ((*i)->GetPosition() - intersectPoint).length();
-		const Vector3d dirToLight = ((*i)->GetPosition() - intersectPoint).Normalize();
+		Vector3d dirToLight = ((*i)->GetPosition() - intersectPoint);
+		dirToLight.NormalizeVector();
 		const Vector3d lightColor = (*i)->GetMaterial().GetColor();
 
 		
@@ -63,7 +64,8 @@ Vector3d LpcMath::DiffuseLighting(const Ray& inRay, const Vector3d& intersectPoi
 		const Vector3d diffuseColor = lightColor*diffuseDotProduct*DIFFUSE_INTENSITY;
 
 		// specular
-		Vector3d halfDir = (dirToLight + -dirToEye).Normalize();
+		Vector3d halfDir = (dirToLight + -dirToEye);
+		halfDir.NormalizeVector;
 		double specAngle = max(halfDir.DotProduct(surfaceNormal), 0.0);
 		double specular = 0;// pow(specAngle, 256);
 
@@ -117,7 +119,8 @@ bool LpcMath::IsCollisionPoint(const Ray& obj1, const Point& rhs, Vector3d& poin
 		return true;
 	}
 
-	const Vector3d dxc = (rhs.GetPosition() - obj1.GetPosition()).Normalize();
+	Vector3d dxc = (rhs.GetPosition() - obj1.GetPosition());
+	dxc.NormalizeVector();
 	return dxc == obj1.GetDirection();
 }
 

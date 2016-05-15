@@ -42,7 +42,7 @@ double Vector3d::lengthSqr() const
 	return (x*x + y*y + z*z);
 }
 
-Vector3d Vector3d::Normalize() const
+/*Vector3d Vector3d::Normalize() const
 {
 	Vector3d returnVec;
 
@@ -55,7 +55,7 @@ Vector3d Vector3d::Normalize() const
 	
 	returnVec = (*this) / length();
 	return returnVec;
-}
+}*/
 
 void Vector3d::NormalizeVector()
 {
@@ -229,7 +229,7 @@ TEST(LengthSqr, Vector3d)
 	ASSERT_EQ(test.lengthSqr(), 30);
 }
 
-TEST(Normalize, Vector3d)
+/*TEST(Normalize, Vector3d)
 {
 	Vector3d test1(3, 4, 0), test2(1, 2, 0);
 	Vector3d testResult = (test1 - test2).Normalize();
@@ -239,7 +239,7 @@ TEST(Normalize, Vector3d)
 	EXPECT_EQ(testResult.y, 0.70710678118654746);
 	EXPECT_EQ(testResult.z, 0);
 	EXPECT_EQ(zeroLength, Vector3d(0, 0, 0));
-}
+}*/
 
 
 TEST(NormalizeVector, Vector3d)

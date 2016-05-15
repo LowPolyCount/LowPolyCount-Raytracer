@@ -10,10 +10,10 @@ public:
 	Vector3d();
 	Vector3d(double inX, double inY, double inZ);
 	Vector3d(const Vector3d& inVector);
-	~Vector3d();
+	virtual ~Vector3d();
 	double length() const;
 	double lengthSqr() const;
-	Vector3d Normalize() const;
+	//Vector3d Normalize() const;
 	void NormalizeVector();
 	double DotProduct(const Vector3d& rhs) const;
 	Vector3d CrossProduct(const Vector3d& rhs) const;
